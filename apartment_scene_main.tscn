@@ -1,7 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://t41eq0yiueh3"]
+[gd_scene load_steps=12 format=3 uid="uid://t41eq0yiueh3"]
 
-[ext_resource type="Texture2D" uid="uid://do21dbsnjnrup" path="res://Sprites/kitchenFloor.png" id="1_slmnh"]
+[ext_resource type="Texture2D" uid="uid://b5k2qgih6jt08" path="res://Sprites/parallaxLayer2.png" id="1_6mbmp"]
+[ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="1_7x8kw"]
+[ext_resource type="Texture2D" uid="uid://idaf2csai4ga" path="res://Sprites/parallaxLayer1.png" id="1_47ydw"]
+[ext_resource type="Texture2D" uid="uid://svrpyou7yb0n" path="res://Sprites/parallaxLayer4.png" id="1_oaeva"]
+[ext_resource type="Texture2D" uid="uid://cumefru27caqe" path="res://Sprites/parallaxLayer3.png" id="1_tpd6x"]
 [ext_resource type="PackedScene" uid="uid://dvls4jsm2r1jn" path="res://character_non_action.tscn" id="2_n8285"]
+[ext_resource type="Texture2D" uid="uid://b1il2iksblyoj" path="res://Sprites/kitchen.png" id="3_7gf22"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s322w"]
 size = Vector2(682, 94)
@@ -18,8 +23,57 @@ size = Vector2(17, 120)
 [node name="ApartmentSceneMain" type="Node2D"]
 texture_filter = 1
 
+[node name="Parallaxex" type="Node2D" parent="."]
+texture_filter = 1
+
+[node name="Parallax5" type="Parallax2D" parent="Parallaxex"]
+scroll_scale = Vector2(0.1, 1)
+autoscroll = Vector2(480, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxex/Parallax5"]
+texture = ExtResource("1_7x8kw")
+
+[node name="Parallax4" type="Parallax2D" parent="Parallaxex"]
+scroll_scale = Vector2(0.2, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxex/Parallax4"]
+position = Vector2(-198, 94)
+texture = ExtResource("1_oaeva")
+
+[node name="Parallax3" type="Parallax2D" parent="Parallaxex"]
+scroll_scale = Vector2(0.3, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxex/Parallax3"]
+position = Vector2(-198, 94)
+texture = ExtResource("1_tpd6x")
+
+[node name="Parallax2" type="Parallax2D" parent="Parallaxex"]
+scroll_scale = Vector2(0.4, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxex/Parallax2"]
+position = Vector2(-198, 94)
+texture = ExtResource("1_6mbmp")
+
+[node name="Parallax1" type="Parallax2D" parent="Parallaxex"]
+texture_filter = 1
+scroll_scale = Vector2(0.5, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallaxex/Parallax1"]
+position = Vector2(-198, 94)
+texture = ExtResource("1_47ydw")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_slmnh")
+position = Vector2(0, -30)
+texture = ExtResource("3_7gf22")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
