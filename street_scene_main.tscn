@@ -11,8 +11,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a81nm"]
 shader = ExtResource("2_26h4s")
-shader_parameter/brightness = -0.1
-shader_parameter/contrast = 1.2
+shader_parameter/brightness = 0.0
+shader_parameter/contrast = 1.0
 shader_parameter/saturation = 1.0
 shader_parameter/redVal = 1.0
 shader_parameter/greenVal = 1.0
