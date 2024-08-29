@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dh4lm0qcpjow0"]
+
+[ext_resource type="Texture2D" uid="uid://cr673t8d7w0l7" path="res://Sprites/stealthBarEmpty.png" id="1_e8wu1"]
+[ext_resource type="Texture2D" uid="uid://3m1tpjhk12wn" path="res://Sprites/stealthBarFilled.png" id="2_y65xe"]
+[ext_resource type="Script" path="res://stealth_bar.gd" id="3_g7dpa"]
+[ext_resource type="Texture2D" uid="uid://dsnajtjblfg1t" path="res://Sprites/stealthBarStealthAccomplished.png" id="4_aq4mf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3no0"]
+atlas = ExtResource("4_aq4mf")
+region = Rect2(0, 0, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whkq7"]
+atlas = ExtResource("4_aq4mf")
+region = Rect2(48, 0, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix6aa"]
+atlas = ExtResource("4_aq4mf")
+region = Rect2(96, 0, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyhf7"]
+atlas = ExtResource("4_aq4mf")
+region = Rect2(144, 0, 48, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_racwg"]
+atlas = ExtResource("4_aq4mf")
+region = Rect2(192, 0, 48, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13dgy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3no0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whkq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix6aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyhf7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_racwg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="stealthBar" type="Node2D"]
+z_index = 100
+texture_filter = 1
+script = ExtResource("3_g7dpa")
+
+[node name="anima" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -35)
+sprite_frames = SubResource("SpriteFrames_13dgy")
+frame_progress = 0.56651
+
+[node name="bar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -42.0
+offset_right = 472.0
+offset_bottom = 228.0
+fill_mode = 4
+texture_under = ExtResource("1_e8wu1")
+texture_progress = ExtResource("2_y65xe")
+
+[connection signal="animation_finished" from="anima" to="." method="_on_anima_animation_finished"]

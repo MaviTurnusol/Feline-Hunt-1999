@@ -125,11 +125,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lkqfc"]
 size = Vector2(15, 42)
 
-[node name="CharacterNonAction" type="CharacterBody2D"]
+[node name="CharacterNonAction" type="CharacterBody2D" groups=["NonAcPlayer"]]
 texture_filter = 1
 script = ExtResource("1_sesam")
 
 [node name="anima" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_ivwb6")
 animation = &"idle"
 autoplay = "idle"
@@ -137,5 +138,3 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 3)
 shape = SubResource("RectangleShape2D_lkqfc")
-
-[node name="Camera2D" type="Camera2D" parent="."]

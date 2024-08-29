@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 
-const SPEED = 100.0
+var speed = 100.0
+var isHidden = false
 
 func _ready():
-	UnlimitedRulebook.nonActionPlayer = self
+	UnlimitedRulebook.actionPlayer = self
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -21,8 +22,8 @@ func _physics_process(delta):
 		$anima.play("idle")
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()

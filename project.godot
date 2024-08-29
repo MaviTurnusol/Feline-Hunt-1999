@@ -14,6 +14,10 @@ config/name="Feline Hunt 1999"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UnlimitedRulebook="*res://UnlimitedRulebook.gd"
+
 [display]
 
 window/size/viewport_width=480
@@ -21,3 +25,8 @@ window/size/viewport_height=270
 window/size/mode=3
 window/stretch/mode="viewport"
 window/stretch/aspect="ignore"
+
+[global_group]
+
+NonAcPlayer=""
+AcPlayer=""
