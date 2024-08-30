@@ -1,13 +1,15 @@
-[gd_scene load_steps=27 format=3 uid="uid://bii5j03m1tixd"]
+[gd_scene load_steps=29 format=3 uid="uid://bii5j03m1tixd"]
 
 [ext_resource type="Texture2D" uid="uid://crnhq53umis84" path="res://Sprites/FelineTileSetScrshot.png" id="1_00pr6"]
 [ext_resource type="Shader" path="res://testShder.gdshader" id="2_26h4s"]
 [ext_resource type="PackedScene" uid="uid://cnb4cdopmbu3b" path="res://character_action.tscn" id="3_xdbv1"]
 [ext_resource type="Texture2D" uid="uid://cyubtcqvxwj8n" path="res://Sprites/yellowSign.png" id="4_apkrj"]
+[ext_resource type="PackedScene" uid="uid://c8dc0x42kkjr2" path="res://hud.tscn" id="5_8wcal"]
 [ext_resource type="Texture2D" uid="uid://bxr8x7tvk6j7t" path="res://Sprites/redSign.png" id="5_562k5"]
 [ext_resource type="Texture2D" uid="uid://tl4518gp2lve" path="res://Sprites/dumbelekWindow-Sheet.png" id="6_x12p7"]
 [ext_resource type="Texture2D" uid="uid://d1ywbxtbnis5d" path="res://Sprites/johnSmoker-Sheet.png" id="7_faknb"]
 [ext_resource type="PackedScene" uid="uid://cj5vbbkglty0n" path="res://hiding_area.tscn" id="8_ifjmi"]
+[ext_resource type="AudioStream" uid="uid://ceebj1nx6st3e" path="res://Conviction [3Bs6n5np2sM].mp3" id="10_f1emj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a81nm"]
 shader = ExtResource("2_26h4s")
@@ -168,6 +170,8 @@ position = Vector2(75, 201)
 texture = ExtResource("4_apkrj")
 centered = false
 
+[node name="HUD" parent="." instance=ExtResource("5_8wcal")]
+
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 texture_filter = 1
 use_parent_material = true
@@ -196,3 +200,7 @@ position = Vector2(110, 217)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hidingArea"]
 position = Vector2(0.5, 12)
 shape = SubResource("RectangleShape2D_4tuf2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_f1emj")
+autoplay = true
