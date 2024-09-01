@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cnb4cdopmbu3b"]
+[gd_scene load_steps=71 format=3 uid="uid://cnb4cdopmbu3b"]
 
 [ext_resource type="Texture2D" uid="uid://sgubpaxor23u" path="res://Sprites/catelynnIdle-Sheet.png" id="1_4o4gt"]
 [ext_resource type="Script" path="res://character_action.gd" id="1_lvh6p"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://clbfxwtb7d3i0" path="res://Sprites/catelynnFall-Sheet.png" id="5_cdjra"]
 [ext_resource type="PackedScene" uid="uid://dh4lm0qcpjow0" path="res://stealth_bar.tscn" id="5_ce4ow"]
 [ext_resource type="Texture2D" uid="uid://dqkty4bynombk" path="res://Sprites/catelynnJump-Sheet.png" id="7_uabrl"]
+[ext_resource type="Texture2D" uid="uid://catbctqtyfrj5" path="res://Sprites/catelynnStalk-Sheet.png" id="9_55gvs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwe4e"]
 atlas = ExtResource("2_vwbpi")
@@ -154,6 +155,46 @@ region = Rect2(192, 0, 64, 64)
 atlas = ExtResource("5_1ue8k")
 region = Rect2(256, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lpogg"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3icn3"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vc47"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyrh1"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la0yb"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2okv"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6x5y"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqe8b"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtaxd"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xnp4"]
+atlas = ExtResource("9_55gvs")
+region = Rect2(576, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_oemi3"]
 atlas = ExtResource("2_iy77s")
 region = Rect2(0, 0, 64, 64)
@@ -230,7 +271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h26tl")
 }],
-"loop": true,
+"loop": false,
 "name": &"catch",
 "speed": 12.0
 }, {
@@ -336,6 +377,41 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_lpogg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3icn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6vc47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyrh1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la0yb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2okv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6x5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqe8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtaxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xnp4")
+}],
+"loop": true,
+"name": &"stalk",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_oemi3")
 }, {
 "duration": 1.0,
@@ -376,6 +452,9 @@ size = Vector2(15, 43)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dyioy"]
 size = Vector2(46, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kn1uy"]
+size = Vector2(15, 13)
+
 [node name="characterAction" type="CharacterBody2D" groups=["AcPlayer"]]
 texture_filter = 1
 use_parent_material = true
@@ -387,9 +466,10 @@ script = ExtResource("1_lvh6p")
 texture_filter = 1
 use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_t07xd")
-animation = &"fall"
+animation = &"stalk"
+frame_progress = 0.546113
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="standingCol" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 2.5)
 shape = SubResource("RectangleShape2D_n7346")
 
@@ -407,3 +487,7 @@ collision_mask = 2
 
 [node name="posClimb" type="Marker2D" parent="."]
 position = Vector2(0, -16)
+
+[node name="catchingCol" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 8.5)
+shape = SubResource("RectangleShape2D_kn1uy")
