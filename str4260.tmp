@@ -1,0 +1,225 @@
+[gd_scene load_steps=32 format=3 uid="uid://bii5j03m1tixd"]
+
+[ext_resource type="Texture2D" uid="uid://crnhq53umis84" path="res://Sprites/FelineTileSetScrshot.png" id="1_00pr6"]
+[ext_resource type="Shader" path="res://testShder.gdshader" id="2_26h4s"]
+[ext_resource type="PackedScene" uid="uid://cnb4cdopmbu3b" path="res://character_action.tscn" id="3_xdbv1"]
+[ext_resource type="Texture2D" uid="uid://cyubtcqvxwj8n" path="res://Sprites/yellowSign.png" id="4_apkrj"]
+[ext_resource type="PackedScene" uid="uid://c8dc0x42kkjr2" path="res://hud.tscn" id="5_8wcal"]
+[ext_resource type="Texture2D" uid="uid://bxr8x7tvk6j7t" path="res://Sprites/redSign.png" id="5_562k5"]
+[ext_resource type="Texture2D" uid="uid://tl4518gp2lve" path="res://Sprites/dumbelekWindow-Sheet.png" id="6_x12p7"]
+[ext_resource type="Texture2D" uid="uid://d1ywbxtbnis5d" path="res://Sprites/johnSmoker-Sheet.png" id="7_faknb"]
+[ext_resource type="PackedScene" uid="uid://cj5vbbkglty0n" path="res://hiding_area.tscn" id="8_ifjmi"]
+[ext_resource type="PackedScene" uid="uid://dtjuft6wc0pjd" path="res://climbable_surface.tscn" id="9_lkdun"]
+[ext_resource type="AudioStream" uid="uid://ceebj1nx6st3e" path="res://Conviction [3Bs6n5np2sM].mp3" id="10_f1emj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a81nm"]
+shader = ExtResource("2_26h4s")
+shader_parameter/brightness = 4.75e-08
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/redVal = 1.0
+shader_parameter/greenVal = 1.0
+shader_parameter/blueVal = 1.0
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/tint_effect_factor = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5c0j"]
+size = Vector2(540, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4f4l"]
+size = Vector2(29, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6pjg"]
+shader = ExtResource("2_26h4s")
+shader_parameter/brightness = 0.0
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/redVal = 1.0
+shader_parameter/greenVal = 1.0
+shader_parameter/blueVal = 1.0
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/tint_effect_factor = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p36e"]
+atlas = ExtResource("6_x12p7")
+region = Rect2(0, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p7on"]
+atlas = ExtResource("6_x12p7")
+region = Rect2(64, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nug3"]
+atlas = ExtResource("6_x12p7")
+region = Rect2(128, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd8ol"]
+atlas = ExtResource("6_x12p7")
+region = Rect2(192, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0pxh"]
+atlas = ExtResource("6_x12p7")
+region = Rect2(256, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5fxo"]
+atlas = ExtResource("6_x12p7")
+region = Rect2(320, 0, 64, 83)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y8134"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p36e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p7on")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nug3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd8ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0pxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5fxo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ifkkp"]
+atlas = ExtResource("7_faknb")
+region = Rect2(0, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vkcg"]
+atlas = ExtResource("7_faknb")
+region = Rect2(64, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yecv1"]
+atlas = ExtResource("7_faknb")
+region = Rect2(128, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvtns"]
+atlas = ExtResource("7_faknb")
+region = Rect2(192, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhu1s"]
+atlas = ExtResource("7_faknb")
+region = Rect2(256, 0, 64, 83)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl1md"]
+atlas = ExtResource("7_faknb")
+region = Rect2(320, 0, 64, 83)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_54je8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ifkkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vkcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yecv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvtns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhu1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl1md")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60s47"]
+size = Vector2(29, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tuf2"]
+size = Vector2(43, 56)
+
+[node name="streetSceneMain" type="Node2D"]
+material = SubResource("ShaderMaterial_a81nm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+texture = ExtResource("1_00pr6")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(270, 263.5)
+shape = SubResource("RectangleShape2D_h5c0j")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(371.5, 208)
+shape = SubResource("RectangleShape2D_i4f4l")
+one_way_collision = true
+
+[node name="shaderRect" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_o6pjg")
+offset_right = 540.0
+offset_bottom = 270.0
+
+[node name="characterAction" parent="." instance=ExtResource("3_xdbv1")]
+position = Vector2(376, 176)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(75, 201)
+texture = ExtResource("4_apkrj")
+centered = false
+
+[node name="HUD" parent="." instance=ExtResource("5_8wcal")]
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+use_parent_material = true
+position = Vector2(168, 136)
+texture = ExtResource("5_562k5")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(142, 56)
+sprite_frames = SubResource("SpriteFrames_y8134")
+autoplay = "default"
+frame_progress = 0.423402
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(387, 14)
+sprite_frames = SubResource("SpriteFrames_54je8")
+autoplay = "default"
+frame_progress = 0.668381
+centered = false
+
+[node name="climbableSurface" parent="." instance=ExtResource("9_lkdun")]
+position = Vector2(369, 210)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(2.5, -4)
+shape = SubResource("RectangleShape2D_60s47")
+
+[node name="hidingArea" parent="." instance=ExtResource("8_ifjmi")]
+position = Vector2(110, 217)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(0.5, 12)
+shape = SubResource("RectangleShape2D_4tuf2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_f1emj")
+autoplay = true

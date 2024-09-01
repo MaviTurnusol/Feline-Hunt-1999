@@ -2,6 +2,7 @@ extends Node
 
 var nonActionPlayer
 var actionPlayer
+var hud
 var stealthBar
 
 var bpm := 100.0

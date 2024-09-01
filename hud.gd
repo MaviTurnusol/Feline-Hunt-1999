@@ -5,11 +5,14 @@ var isFirstBeatDone = false
 func _ready():
 	$beatTimer.wait_time = 60.0/UnlimitedRulebook.bpm + 0.0667
 	$beatTimer.start()
+	UnlimitedRulebook.hud = self
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
+	$staminaBar.value = UnlimitedRulebook.actionPlayer.stamina
+	$hpBar.value = UnlimitedRulebook.actionPlayer.health
 	pass
 
 

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dtjuft6wc0pjd"]
+
+[node name="climbableSurface" type="StaticBody2D" groups=["climbable"]]
+collision_layer = 2
+collision_mask = 2

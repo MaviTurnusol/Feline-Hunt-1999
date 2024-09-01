@@ -8,6 +8,21 @@
 [ext_resource type="Texture2D" uid="uid://p0138p0mg70o" path="res://Sprites/loveViness.png" id="5_4q583"]
 [ext_resource type="Texture2D" uid="uid://3staabhd72n1" path="res://Sprites/loveThumper.png" id="6_flab5"]
 
+[sub_resource type="Animation" id="Animation_l4xwd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("loveThumper:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(22, 37)]
+}
+
 [sub_resource type="Animation" id="Animation_lvdv8"]
 resource_name = "beat"
 length = 0.2
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(22, 37), Vector2(24, 39), Vector2(22, 37)]
-}
-
-[sub_resource type="Animation" id="Animation_l4xwd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("loveThumper:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(22, 37)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nt3lg"]
@@ -56,7 +56,6 @@ offset_right = 194.0
 offset_bottom = 38.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-min_value = 100.0
 value = 100.0
 texture_under = ExtResource("1_xy168")
 texture_progress = ExtResource("2_ic284")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bii5j03m1tixd"]
+[gd_scene load_steps=36 format=3 uid="uid://bii5j03m1tixd"]
 
 [ext_resource type="Texture2D" uid="uid://crnhq53umis84" path="res://Sprites/FelineTileSetScrshot.png" id="1_00pr6"]
 [ext_resource type="Shader" path="res://testShder.gdshader" id="2_26h4s"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://tl4518gp2lve" path="res://Sprites/dumbelekWindow-Sheet.png" id="6_x12p7"]
 [ext_resource type="Texture2D" uid="uid://d1ywbxtbnis5d" path="res://Sprites/johnSmoker-Sheet.png" id="7_faknb"]
 [ext_resource type="PackedScene" uid="uid://cj5vbbkglty0n" path="res://hiding_area.tscn" id="8_ifjmi"]
+[ext_resource type="PackedScene" uid="uid://dtjuft6wc0pjd" path="res://climbable_surface.tscn" id="9_lkdun"]
 [ext_resource type="AudioStream" uid="uid://ceebj1nx6st3e" path="res://Conviction [3Bs6n5np2sM].mp3" id="10_f1emj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a81nm"]
@@ -24,6 +25,15 @@ shader_parameter/tint_effect_factor = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5c0j"]
 size = Vector2(540, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4f4l"]
+size = Vector2(29, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfxcu"]
+size = Vector2(23, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v3sm"]
+size = Vector2(540, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o6pjg"]
 shader = ExtResource("2_26h4s")
@@ -136,6 +146,15 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_60s47"]
+size = Vector2(29, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ysq0"]
+size = Vector2(23, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykipg"]
+size = Vector2(540, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tuf2"]
 size = Vector2(43, 56)
 
@@ -154,6 +173,21 @@ centered = false
 position = Vector2(270, 263.5)
 shape = SubResource("RectangleShape2D_h5c0j")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(371.5, 209)
+shape = SubResource("RectangleShape2D_i4f4l")
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(332.5, 192.5)
+shape = SubResource("RectangleShape2D_xfxcu")
+one_way_collision = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(270, 139.5)
+shape = SubResource("RectangleShape2D_5v3sm")
+one_way_collision = true
+
 [node name="shaderRect" type="ColorRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_o6pjg")
@@ -161,7 +195,7 @@ offset_right = 540.0
 offset_bottom = 270.0
 
 [node name="characterAction" parent="." instance=ExtResource("3_xdbv1")]
-position = Vector2(149, 231)
+position = Vector2(376, 175)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -193,6 +227,21 @@ sprite_frames = SubResource("SpriteFrames_54je8")
 autoplay = "default"
 frame_progress = 0.668381
 centered = false
+
+[node name="climbableSurface" parent="." instance=ExtResource("9_lkdun")]
+position = Vector2(369, 210)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(2.5, -2)
+shape = SubResource("RectangleShape2D_60s47")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-36.5, -17.5)
+shape = SubResource("RectangleShape2D_1ysq0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-99, -70.5)
+shape = SubResource("RectangleShape2D_ykipg")
 
 [node name="hidingArea" parent="." instance=ExtResource("8_ifjmi")]
 position = Vector2(110, 217)
