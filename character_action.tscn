@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cnb4cdopmbu3b"]
+[gd_scene load_steps=59 format=3 uid="uid://cnb4cdopmbu3b"]
 
 [ext_resource type="Texture2D" uid="uid://sgubpaxor23u" path="res://Sprites/catelynnIdle-Sheet.png" id="1_4o4gt"]
 [ext_resource type="Script" path="res://character_action.gd" id="1_lvh6p"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://da2d02q6ql1eb" path="res://Sprites/catelynnCatchSideways-Sheet.png" id="2_vwbpi"]
 [ext_resource type="Texture2D" uid="uid://cy0qi75flmd8e" path="res://Sprites/catelynnClimb-Sheet.png" id="4_4enqx"]
 [ext_resource type="Texture2D" uid="uid://dq2rqtuq8lht" path="res://Sprites/catelynnRun-Sheet.png" id="5_1ue8k"]
+[ext_resource type="Texture2D" uid="uid://clbfxwtb7d3i0" path="res://Sprites/catelynnFall-Sheet.png" id="5_cdjra"]
 [ext_resource type="PackedScene" uid="uid://dh4lm0qcpjow0" path="res://stealth_bar.tscn" id="5_ce4ow"]
+[ext_resource type="Texture2D" uid="uid://dqkty4bynombk" path="res://Sprites/catelynnJump-Sheet.png" id="7_uabrl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gwe4e"]
 atlas = ExtResource("2_vwbpi")
@@ -88,6 +90,18 @@ region = Rect2(448, 0, 64, 164)
 atlas = ExtResource("4_4enqx")
 region = Rect2(512, 0, 64, 164)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xontc"]
+atlas = ExtResource("5_cdjra")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aswn6"]
+atlas = ExtResource("5_cdjra")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aylst"]
+atlas = ExtResource("5_cdjra")
+region = Rect2(128, 0, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cojgk"]
 atlas = ExtResource("1_4o4gt")
 region = Rect2(0, 0, 64, 64)
@@ -107,6 +121,18 @@ region = Rect2(192, 0, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pn8rc"]
 atlas = ExtResource("1_4o4gt")
 region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2lvtd"]
+atlas = ExtResource("7_uabrl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twobq"]
+atlas = ExtResource("7_uabrl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v88lj"]
+atlas = ExtResource("7_uabrl")
+region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f05x0"]
 atlas = ExtResource("5_1ue8k")
@@ -242,6 +268,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_xontc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aswn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aylst")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_cojgk")
 }, {
 "duration": 1.0,
@@ -258,6 +298,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2lvtd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twobq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v88lj")
+}],
+"loop": false,
+"name": &"jump",
 "speed": 6.0
 }, {
 "frames": [{
@@ -333,8 +387,7 @@ script = ExtResource("1_lvh6p")
 texture_filter = 1
 use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_t07xd")
-animation = &"climb"
-frame_progress = 0.84625
+animation = &"fall"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 2.5)

@@ -49,7 +49,13 @@ func _physics_process(delta):
 			position.y -= 40
 			isClimbing = false
 			$anima.play("idle")
-	elif isRunning:
+	elif velocity.y > 0:
+		if $anima.animation != "fall":
+			$anima.play("fall")
+	elif velocity.y < 0:
+		if $anima.animation != "jump":
+			$anima.play("jump")
+	if isRunning:
 		speed = 150.0
 		if stamina > 0:
 			stamina -= delta * 16
@@ -67,8 +73,11 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("space") && direction == 0 && !isClimbing:
 				isClimbing = true
 				stamina -= 10
-				velocity.y -= 400
+				velocity.y = -400
 				$anima.play("climb")
+	if !isClimbing && Input.is_action_just_pressed("space") && is_on_floor():
+		velocity.y -= 175
+	
 	
 	if direction:
 		velocity.x = direction * speed
