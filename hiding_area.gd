@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if UnlimitedRulebook.actionPlayer.velocity == Vector2.ZERO:
+	if UnlimitedRulebook.actionPlayer.velocity.x < 100:
 		monitoring = true
 	else:
 		monitoring = false
