@@ -473,8 +473,7 @@ frame_progress = 0.546113
 position = Vector2(-2.5, 2.5)
 shape = SubResource("RectangleShape2D_n7346")
 
-[node name="catchArea" type="Area2D" parent="."]
-visible = false
+[node name="catchArea" type="Area2D" parent="." groups=["cathingen"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="catchArea"]
 position = Vector2(5, 10)

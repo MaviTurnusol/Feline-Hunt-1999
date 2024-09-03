@@ -7,8 +7,18 @@ var randStatesArray = ["standing", "checking", "walking", "tired"]
 var direction = -1
 @onready var anima = $anima
 var anim_state = "standing" : set = set_anim
+@export var grabValue = 0 : set = set_grabval
+var grabToggled = false
+var isBeingGrabbed = false
 
 @onready var stateTimer = $stateTimer
+
+func set_grabval(value):
+	if value > 100:
+		grabValue = 100
+		return
+	else:
+		grabValue = value
 
 func set_anim(value):
 	if value != anim_state:
@@ -106,6 +116,25 @@ func _physics_process(delta):
 			anim_state = "jumping"
 			if is_on_floor() && anima.frame == 2:
 				state = prevState
+	
+	$grabBar.value = grabValue
+	if isBeingGrabbed:
+		if Input.is_action_pressed("interact"):
+			if !grabToggled:
+				$grabToggle.play("toggle")
+				grabToggled = true
+			grabValue += delta * 125
+			print(grabValue)
+		elif Input.is_action_just_released("interact"):
+			$grabToggle.play_backwards("toggle")
+			grabToggled = false
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "grabValue", 0, 0.1)
+	elif grabToggled:
+		grabToggled = false
+		$grabToggle.play_backwards("toggle")
+		var tween = get_tree().create_tween()
+		tween.tween_property(self, "grabValue", 0, 0.1)
 
 
 	move_and_slide()
@@ -135,4 +164,18 @@ func _on_sight_area_small_body_entered(body):
 func _on_move_down_timer_timeout():
 	$moveDownTimer.wait_time = randf_range(6, 10)
 	position.y += 1
+	pass # Replace with function body.
+
+
+func _on_grabbable_area_area_entered(area):
+	if area.is_in_group("cathingen"):
+		$outlineToggle.play("enable")
+		isBeingGrabbed = true
+	pass # Replace with function body.
+
+
+func _on_grabbable_area_area_exited(area):
+	if area.is_in_group("cathingen"):
+		isBeingGrabbed = false
+		$outlineToggle.play_backwards("enable")
 	pass # Replace with function body.
