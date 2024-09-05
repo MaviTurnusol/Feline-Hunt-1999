@@ -8,6 +8,7 @@ var direction = -1
 @onready var anima = $anima
 var anim_state = "standing" : set = set_anim
 @export var grabValue = 0 : set = set_grabval
+@export var tweenVelox = 0
 var grabToggled = false
 var isBeingGrabbed = false
 
@@ -16,6 +17,8 @@ var isBeingGrabbed = false
 func set_grabval(value):
 	if value > 100:
 		grabValue = 100
+		if state != "tossed":
+			state = "tossed"
 		return
 	else:
 		grabValue = value
@@ -52,10 +55,16 @@ func set_state(value):
 		direction = sign(global_position.x - UnlimitedRulebook.actionPlayer.global_position.x)
 		$sightMarker.scale.x = direction
 	if value == "jumping":
-		velocity.y -= 300
+		velocity.y -= 320
+	if value == "tossed":
+		velocity.y -= 625
+		$CollisionShape2D.disabled = true
+		$sightMarker/sightAreaLarge/CollisionShape2D.disabled = true
+		$sightMarker/sightAreaSmall/CollisionShape2D.disabled = true
 	state = value
 
 func _ready():
+	state = randStatesArray.pick_random()
 	stateTimer.wait_time = randf_range(2, 8)
 
 func _physics_process(delta):
@@ -116,6 +125,16 @@ func _physics_process(delta):
 			anim_state = "jumping"
 			if is_on_floor() && anima.frame == 2:
 				state = prevState
+		"tossed":
+			anim_state = "jumping"
+			if anima.frame == 2:
+				anima.pause()
+				anima.scale.x += delta * 2
+				anima.scale.y += delta * 2
+				var tween = get_tree().create_tween()
+				tween.tween_property(anima, "rotation_degrees", 360, 0.4)
+				stateTimer.stop()
+			
 	
 	$grabBar.value = grabValue
 	if isBeingGrabbed:

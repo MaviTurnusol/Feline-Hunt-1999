@@ -19,7 +19,7 @@ func _physics_process(delta):
 			$anima.flip_h = true
 	else:
 		$anima.play("idle")
-	var direction = Input.get_axis("ui_left", "ui_right")
+	var direction = Input.get_axis("left", "right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
