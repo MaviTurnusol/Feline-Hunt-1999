@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://t41eq0yiueh3"]
+[gd_scene load_steps=30 format=3 uid="uid://t41eq0yiueh3"]
 
 [ext_resource type="Texture2D" uid="uid://b5k2qgih6jt08" path="res://Sprites/parallaxLayer2.png" id="1_6mbmp"]
 [ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="1_7x8kw"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://cumefru27caqe" path="res://Sprites/parallaxLayer3.png" id="1_tpd6x"]
 [ext_resource type="PackedScene" uid="uid://dvls4jsm2r1jn" path="res://character_non_action.tscn" id="2_n8285"]
 [ext_resource type="Texture2D" uid="uid://b1il2iksblyoj" path="res://Sprites/kitchen.png" id="3_7gf22"]
+[ext_resource type="Texture2D" uid="uid://bv0imwxtly5ay" path="res://Sprites/cafeInteriorRenewed.png" id="9_bstam"]
+[ext_resource type="PackedScene" uid="uid://f8nh4vg5vuk1" path="res://planning_book.tscn" id="11_qbtja"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_07nct"]
 shader = ExtResource("1_bq86h")
@@ -22,7 +24,7 @@ shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/tint_effect_factor = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s322w"]
-size = Vector2(682, 94)
+size = Vector2(1023, 94)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nrkk"]
 size = Vector2(14, 298)
@@ -30,8 +32,8 @@ size = Vector2(14, 298)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1pvy"]
 size = Vector2(668, 178)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_36lr2"]
-size = Vector2(17, 120)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qfva"]
+size = Vector2(689, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r2wpk"]
 size = Vector2(214, 120)
@@ -41,6 +43,91 @@ size = Vector2(415, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43as0"]
 size = Vector2(1, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dvl46"]
+size = Vector2(480, 270)
+
+[sub_resource type="Animation" id="Animation_b4nke"]
+resource_name = "faded"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fadeLayer/bigBlackRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q6tph"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fadeLayer/bigBlackRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juyai"]
+_data = {
+"RESET": SubResource("Animation_q6tph"),
+"faded": SubResource("Animation_b4nke")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8lc8"]
+size = Vector2(14.5, 81)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy4w0"]
+size = Vector2(14, 81.5)
+
+[sub_resource type="Animation" id="Animation_ukcib"]
+resource_name = "pull"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rulebookLayer/planningBook:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 270), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wfgjq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("rulebookLayer/planningBook:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 270)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sr1hc"]
+_data = {
+"RESET": SubResource("Animation_wfgjq"),
+"pull": SubResource("Animation_ukcib")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmfxa"]
+size = Vector2(13, 21)
 
 [node name="ApartmentSceneMain" type="Node2D"]
 texture_filter = 1
@@ -101,10 +188,14 @@ use_parent_material = true
 position = Vector2(0, -30)
 texture = ExtResource("3_7gf22")
 
+[node name="Cafeinterior" type="Sprite2D" parent="."]
+position = Vector2(-107, 461)
+texture = ExtResource("9_bstam")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-107, 149)
+position = Vector2(63.5, 149)
 shape = SubResource("RectangleShape2D_s322w")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -115,34 +206,89 @@ shape = SubResource("RectangleShape2D_7nrkk")
 position = Vector2(-100, -107)
 shape = SubResource("RectangleShape2D_p1pvy")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(225.5, 42)
-shape = SubResource("RectangleShape2D_36lr2")
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-191.5, 561)
+shape = SubResource("RectangleShape2D_7qfva")
 
-[node name="CharacterNonAction" parent="." instance=ExtResource("2_n8285")]
+[node name="CharacterNonAction" parent="." groups=["noAcPlayer"] instance=ExtResource("2_n8285")]
 use_parent_material = true
-position = Vector2(-337, 73)
+position = Vector2(22, 501)
 
 [node name="cam" type="Camera2D" parent="."]
 position = Vector2(-12, 24)
 
 [node name="kitchenArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kitchenArea"]
 position = Vector2(-305, 42)
 shape = SubResource("RectangleShape2D_r2wpk")
 
 [node name="corridoorArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="corridoorArea"]
 position = Vector2(9.5, 42)
 shape = SubResource("RectangleShape2D_c1hj2")
 
 [node name="windowArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="windowArea"]
 position = Vector2(-429.5, 42)
 shape = SubResource("RectangleShape2D_43as0")
+
+[node name="cafeInteriorArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cafeInteriorArea"]
+position = Vector2(-207, 461)
+shape = SubResource("RectangleShape2D_dvl46")
+
+[node name="fadeLayer" type="CanvasLayer" parent="."]
+
+[node name="bigBlackRect" type="ColorRect" parent="fadeLayer"]
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 0)
+
+[node name="teleportAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_juyai")
+}
+
+[node name="teleportToCafeInterior" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="teleportToCafeInterior"]
+position = Vector2(240.75, 61.5)
+shape = SubResource("RectangleShape2D_j8lc8")
+
+[node name="teleportToHouseDoor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="teleportToHouseDoor"]
+position = Vector2(40, 483.75)
+shape = SubResource("RectangleShape2D_gy4w0")
+
+[node name="tpTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="rulebookLayer" type="CanvasLayer" parent="."]
+
+[node name="planningBook" parent="rulebookLayer" instance=ExtResource("11_qbtja")]
+offset_top = 270.0
+offset_bottom = 270.0
+
+[node name="bookPuller" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sr1hc")
+}
+
+[node name="bookArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bookArea"]
+position = Vector2(-242.5, 514.5)
+shape = SubResource("RectangleShape2D_pmfxa")
 
 [connection signal="body_entered" from="kitchenArea" to="." method="_on_kitchen_area_body_entered"]
 [connection signal="body_exited" from="kitchenArea" to="." method="_on_kitchen_area_body_exited"]
@@ -150,3 +296,10 @@ shape = SubResource("RectangleShape2D_43as0")
 [connection signal="body_exited" from="corridoorArea" to="." method="_on_corridoor_area_body_exited"]
 [connection signal="body_entered" from="windowArea" to="." method="_on_window_area_body_entered"]
 [connection signal="body_exited" from="windowArea" to="." method="_on_window_area_body_exited"]
+[connection signal="body_entered" from="cafeInteriorArea" to="." method="_on_cafe_interior_area_body_entered"]
+[connection signal="body_exited" from="cafeInteriorArea" to="." method="_on_cafe_interior_area_body_exited"]
+[connection signal="body_entered" from="teleportToCafeInterior" to="." method="_on_teleport_to_cafe_interior_body_entered"]
+[connection signal="body_entered" from="teleportToHouseDoor" to="." method="_on_teleport_to_house_door_body_entered"]
+[connection signal="timeout" from="tpTimer" to="." method="_on_tp_timer_timeout"]
+[connection signal="body_entered" from="bookArea" to="." method="_on_book_area_body_entered"]
+[connection signal="body_exited" from="bookArea" to="." method="_on_book_area_body_exited"]

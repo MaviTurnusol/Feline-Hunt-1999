@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bqeplo7isa4wp" path="res://Sprites/catBarFilled.png" id="11_5ilo1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_khgtf"]
+resource_local_to_scene = true
 shader = ExtResource("2_lw4l0")
 shader_parameter/outline_color = Color(1, 1, 1, 1)
 shader_parameter/progress = 0.0

@@ -22,8 +22,10 @@ func set_stamina(value):
 
 func _ready():
 	UnlimitedRulebook.actionPlayer = self
+	health = UnlimitedRulebook.health
 
 func _physics_process(delta):
+	UnlimitedRulebook.health = health
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

@@ -138,3 +138,8 @@ autoplay = "idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, 3)
 shape = SubResource("RectangleShape2D_lkqfc")
+
+[node name="walkTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="walkTimer" to="." method="_on_walk_timer_timeout"]

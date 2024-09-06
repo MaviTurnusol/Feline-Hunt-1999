@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://bii5j03m1tixd"]
+[gd_scene load_steps=86 format=3 uid="uid://bii5j03m1tixd"]
 
 [ext_resource type="Shader" path="res://testShder.gdshader" id="2_26h4s"]
 [ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="2_ifonj"]
@@ -11,12 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://bxr8x7tvk6j7t" path="res://Sprites/redSign.png" id="5_562k5"]
 [ext_resource type="Texture2D" uid="uid://idaf2csai4ga" path="res://Sprites/parallaxLayer1.png" id="6_varii"]
 [ext_resource type="Texture2D" uid="uid://tl4518gp2lve" path="res://Sprites/dumbelekWindow-Sheet.png" id="6_x12p7"]
+[ext_resource type="Shader" path="res://fogtest.gdshader" id="7_4chdd"]
 [ext_resource type="Texture2D" uid="uid://d1ywbxtbnis5d" path="res://Sprites/johnSmoker-Sheet.png" id="7_faknb"]
-[ext_resource type="Texture2D" uid="uid://c7uixcxayd4eo" path="res://Sprites/FelineTileSetScrshot1.png" id="7_hookn"]
+[ext_resource type="Texture2D" uid="uid://bvk4yifs7j5f0" path="res://Sprites/FelineTileSetScrshot3.png" id="8_hs6ib"]
 [ext_resource type="PackedScene" uid="uid://cj5vbbkglty0n" path="res://hiding_area.tscn" id="8_ifjmi"]
 [ext_resource type="PackedScene" uid="uid://dtjuft6wc0pjd" path="res://climbable_surface.tscn" id="9_lkdun"]
 [ext_resource type="AudioStream" uid="uid://ceebj1nx6st3e" path="res://Conviction [3Bs6n5np2sM].mp3" id="10_f1emj"]
 [ext_resource type="Script" path="res://action_camera.gd" id="10_nf62j"]
+[ext_resource type="Texture2D" uid="uid://ubxcov21xdcd" path="res://Sprites/AirVent-Sheet.png" id="10_qfvul"]
+[ext_resource type="Texture2D" uid="uid://4vcrfltumjse" path="res://Sprites/dynasty-Sheet.png" id="12_38prv"]
 [ext_resource type="PackedScene" uid="uid://b3tw2y42jlg88" path="res://gato.tscn" id="12_j0wye"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a81nm"]
@@ -29,6 +32,21 @@ shader_parameter/greenVal = 1.0
 shader_parameter/blueVal = 1.0
 shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/tint_effect_factor = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_drdmj"]
+frequency = 0.0075
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_odwqe"]
+width = 480
+height = 270
+seamless = true
+noise = SubResource("FastNoiseLite_drdmj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wnc3a"]
+shader = ExtResource("7_4chdd")
+shader_parameter/density = 0.126
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_odwqe")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ifkkp"]
 atlas = ExtResource("7_faknb")
@@ -130,8 +148,115 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v34mq"]
+atlas = ExtResource("10_qfvul")
+region = Rect2(0, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vs4a"]
+atlas = ExtResource("10_qfvul")
+region = Rect2(22, 0, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vprvo"]
+atlas = ExtResource("10_qfvul")
+region = Rect2(44, 0, 22, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2kj4s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v34mq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vs4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vprvo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4175"]
+atlas = ExtResource("12_38prv")
+region = Rect2(0, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ugswa"]
+atlas = ExtResource("12_38prv")
+region = Rect2(30, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_347fm"]
+atlas = ExtResource("12_38prv")
+region = Rect2(60, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avogy"]
+atlas = ExtResource("12_38prv")
+region = Rect2(90, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jcqr"]
+atlas = ExtResource("12_38prv")
+region = Rect2(120, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtt4c"]
+atlas = ExtResource("12_38prv")
+region = Rect2(150, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpy3h"]
+atlas = ExtResource("12_38prv")
+region = Rect2(180, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4vvr"]
+atlas = ExtResource("12_38prv")
+region = Rect2(210, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uaie6"]
+atlas = ExtResource("12_38prv")
+region = Rect2(240, 0, 30, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur63q"]
+atlas = ExtResource("12_38prv")
+region = Rect2(270, 0, 30, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dww1f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4175")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ugswa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_347fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avogy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jcqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtt4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpy3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4vvr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uaie6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur63q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h5c0j"]
-size = Vector2(1521, 13)
+size = Vector2(3168, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4f4l"]
 size = Vector2(29, 2)
@@ -169,6 +294,18 @@ size = Vector2(27, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_85ikp"]
 size = Vector2(23, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8do1"]
+size = Vector2(22, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gaslp"]
+size = Vector2(54, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ibap"]
+size = Vector2(72, 269.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xytv1"]
+size = Vector2(214, 6)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o6pjg"]
 shader = ExtResource("2_26h4s")
 shader_parameter/brightness = 0.0
@@ -201,6 +338,35 @@ size = Vector2(40, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tuf2"]
 size = Vector2(43, 56)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsbmh"]
+size = Vector2(1, 102)
+
+[sub_resource type="Gradient" id="Gradient_uddeq"]
+offsets = PackedFloat32Array(0.262295, 0.713115)
+colors = PackedColorArray(0.266575, 0.266575, 0.266575, 1, 0.537011, 0.537011, 0.537011, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wcrwj"]
+gradient = SubResource("Gradient_uddeq")
+
+[sub_resource type="Curve" id="Curve_pqa30"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pv6fr"]
+curve = SubResource("Curve_pqa30")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nr21x"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(480, 270, 1)
+spread = 61.18
+gravity = Vector3(-98, 20, 0)
+color = Color(0.67069, 0.67069, 0.67069, 1)
+color_ramp = SubResource("GradientTexture1D_wcrwj")
+hue_variation_curve = SubResource("CurveTexture_pv6fr")
+turbulence_enabled = true
+
 [node name="streetSceneMain" type="Node2D"]
 material = SubResource("ShaderMaterial_a81nm")
 
@@ -208,7 +374,7 @@ material = SubResource("ShaderMaterial_a81nm")
 z_index = -2
 texture_filter = 1
 use_parent_material = true
-position = Vector2(-22, 42)
+position = Vector2(-22, 40)
 
 [node name="Parallax5" type="Parallax2D" parent="Parallaxex"]
 scroll_scale = Vector2(0.1, 1)
@@ -255,12 +421,24 @@ repeat_times = 6
 position = Vector2(-198, 94)
 texture = ExtResource("6_varii")
 
+[node name="Parallax0" type="Parallax2D" parent="Parallaxex"]
+z_index = 3
+repeat_size = Vector2(480, 270)
+repeat_times = 12
+
+[node name="ColorRect" type="ColorRect" parent="Parallaxex/Parallax0"]
+material = SubResource("ShaderMaterial_wnc3a")
+offset_left = 22.0
+offset_top = -40.0
+offset_right = 502.0
+offset_bottom = 230.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -2
 texture_filter = 1
 use_parent_material = true
-position = Vector2(-664, 0)
-texture = ExtResource("7_hookn")
+position = Vector2(-1364, 0)
+texture = ExtResource("8_hs6ib")
 centered = false
 
 [node name="JohnSmoker" type="AnimatedSprite2D" parent="."]
@@ -279,12 +457,26 @@ autoplay = "default"
 frame_progress = 0.423402
 centered = false
 
+[node name="vent" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(267, 119)
+sprite_frames = SubResource("SpriteFrames_2kj4s")
+autoplay = "default"
+frame_progress = 0.2
+
+[node name="catmaker" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-152, 231)
+sprite_frames = SubResource("SpriteFrames_dww1f")
+autoplay = "default"
+frame_progress = 0.439626
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 5
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(97.5, 263.5)
+position = Vector2(220, 263.5)
 shape = SubResource("RectangleShape2D_h5c0j")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -392,6 +584,67 @@ position = Vector2(157.5, 199.5)
 shape = SubResource("RectangleShape2D_85ikp")
 one_way_collision = true
 
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(144, 159)
+shape = SubResource("RectangleShape2D_71p4x")
+one_way_collision = true
+
+[node name="CollisionShape2D24" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(267, 109)
+shape = SubResource("RectangleShape2D_o8do1")
+one_way_collision = true
+
+[node name="CollisionShape2D25" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-677, 200)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D26" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-499, 200)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D27" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-677, 82)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D28" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-499, 82)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D29" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-868, 200)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D30" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-868, 82)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D31" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1040, 200)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D32" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1040, 82)
+shape = SubResource("RectangleShape2D_gaslp")
+one_way_collision = true
+
+[node name="CollisionShape2D33" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1400, 134.75)
+shape = SubResource("RectangleShape2D_2ibap")
+
+[node name="CollisionShape2D34" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-1257, 254)
+shape = SubResource("RectangleShape2D_xytv1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-1150, 251, -1150, 257, -1128, 257)
+
 [node name="shaderRect" type="ColorRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_o6pjg")
@@ -400,6 +653,7 @@ offset_bottom = 270.0
 
 [node name="actionCamera" type="Camera2D" parent="."]
 position = Vector2(192, 135)
+limit_left = -1361
 drag_top_margin = 1.0
 drag_bottom_margin = 1.0
 script = ExtResource("10_nf62j")
@@ -466,12 +720,48 @@ shape = SubResource("RectangleShape2D_xwjss")
 position = Vector2(-211.5, -10.5)
 shape = SubResource("RectangleShape2D_1ysq0")
 
+[node name="CollisionShape2D25" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-1046, -10)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D26" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-868, -10)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D27" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-1046, -128)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D28" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-868, -128)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D29" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-1237, -10)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D30" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-1237, -128)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D31" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-1409, -10)
+shape = SubResource("RectangleShape2D_gaslp")
+
+[node name="CollisionShape2D32" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(-1409, -128)
+shape = SubResource("RectangleShape2D_gaslp")
+
 [node name="hidingArea" parent="." instance=ExtResource("8_ifjmi")]
 position = Vector2(110, 217)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hidingArea"]
 position = Vector2(0.5, 12)
 shape = SubResource("RectangleShape2D_4tuf2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(69.5, -11)
+shape = SubResource("RectangleShape2D_dsbmh")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_f1emj")
@@ -484,3 +774,11 @@ position = Vector2(56, 246)
 
 [node name="Gato3" parent="." instance=ExtResource("12_j0wye")]
 position = Vector2(218, 122)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
+position = Vector2(531, 119)
+amount = 24
+process_material = SubResource("ParticleProcessMaterial_nr21x")
+lifetime = 30.0

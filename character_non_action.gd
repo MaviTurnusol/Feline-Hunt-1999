@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 100.0
+var forcedWalk = false
 
 func _ready():
 	UnlimitedRulebook.nonActionPlayer = self
@@ -20,9 +21,23 @@ func _physics_process(delta):
 	else:
 		$anima.play("idle")
 	var direction = Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
+	if !forcedWalk:
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		pass
 
 	move_and_slide()
+
+func era_walk(duration, direction):
+	forcedWalk = true
+	$walkTimer.wait_time = duration
+	$walkTimer.start()
+	velocity.x = direction * SPEED
+
+
+func _on_walk_timer_timeout():
+	forcedWalk = false
+	pass # Replace with function body.
