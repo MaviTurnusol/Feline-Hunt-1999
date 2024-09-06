@@ -122,7 +122,7 @@ theme_override_font_sizes/font_size = 16
 text = "0/5"
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="rightPage"]
+[node name="startDay" type="Button" parent="rightPage"]
 layout_mode = 2
 theme = ExtResource("4_xo0eq")
 text = "Start Day"
@@ -195,3 +195,5 @@ text = "20.00 - 00.00"
 
 [node name="Activity" parent="leftPage/sect4" instance=ExtResource("4_sd4w2")]
 layout_mode = 2
+
+[connection signal="pressed" from="rightPage/startDay" to="." method="_on_start_day_pressed"]

@@ -14,3 +14,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_start_day_pressed():
+	do_next_acti()
+	pass # Replace with function body.
+
+func do_next_acti():
+	if UnlimitedRulebook.currActi < 3:
+		if !UnlimitedRulebook.actirray.has("empty"):
+			match UnlimitedRulebook.actirray[UnlimitedRulebook.currActi]:
+				"Hunt":
+					get_tree().change_scene_to_file("res://street_scene_main.tscn")
+			pass

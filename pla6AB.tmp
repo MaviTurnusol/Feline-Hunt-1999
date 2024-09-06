@@ -1,0 +1,199 @@
+[gd_scene load_steps=7 format=3 uid="uid://f8nh4vg5vuk1"]
+
+[ext_resource type="Script" path="res://planning_book.gd" id="1_87v7g"]
+[ext_resource type="Texture2D" uid="uid://ccmpcbohxdntn" path="res://Sprites/rulebook.png" id="1_quggg"]
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="2_g6wim"]
+[ext_resource type="PackedScene" uid="uid://bb8s77rbjg0i2" path="res://activity.tscn" id="4_sd4w2"]
+[ext_resource type="Theme" uid="uid://2dip1rniy10o" path="res://activitytheme.tres" id="4_xo0eq"]
+
+[sub_resource type="Theme" id="Theme_k5tnr"]
+
+[node name="planningBook" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_87v7g")
+
+[node name="book" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_k5tnr")
+texture = ExtResource("1_quggg")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 115.0
+offset_top = 36.0
+offset_right = 218.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "Daily Plan"
+horizontal_alignment = 1
+
+[node name="rightPage" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 35.0
+offset_right = 365.0
+offset_bottom = 248.0
+theme_override_constants/separation = 10
+
+[node name="sect1" type="VBoxContainer" parent="rightPage"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="moneyTitle" type="Label" parent="rightPage/sect1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "Money"
+horizontal_alignment = 1
+
+[node name="money" type="Label" parent="rightPage/sect1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "0$"
+horizontal_alignment = 1
+
+[node name="sect2" type="VBoxContainer" parent="rightPage"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="physHealthTitle" type="Label" parent="rightPage/sect2"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/line_spacing = -6
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "Physical Health"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="physicalHealth" type="Label" parent="rightPage/sect2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "0/5"
+horizontal_alignment = 1
+
+[node name="sect3" type="VBoxContainer" parent="rightPage"]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="mentalHealthTitle" type="Label" parent="rightPage/sect3"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_constants/line_spacing = -6
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "Mental  Health"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="mentalHealth" type="Label" parent="rightPage/sect3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.552956, 0.552956, 0.552956, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+theme_override_font_sizes/font_size = 16
+text = "0/5"
+horizontal_alignment = 1
+
+[node name="startDay" type="Button" parent="rightPage"]
+layout_mode = 2
+theme = ExtResource("4_xo0eq")
+text = "Start Day"
+
+[node name="leftPage" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.239583
+anchor_top = 0.221889
+anchor_right = 0.454
+anchor_bottom = 0.696296
+offset_top = 0.0900002
+offset_right = 0.0799866
+offset_bottom = 57.0
+theme_override_constants/separation = 22
+metadata/_edit_use_anchors_ = true
+
+[node name="sect1" type="VBoxContainer" parent="leftPage"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="leftPage/sect1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.548963, 0.548963, 0.548963, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+text = "08.00 - 12.00"
+
+[node name="Activity" parent="leftPage/sect1" instance=ExtResource("4_sd4w2")]
+layout_mode = 2
+
+[node name="sect2" type="VBoxContainer" parent="leftPage"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="leftPage/sect2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.548963, 0.548963, 0.548963, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+text = "12.00 - 16.00"
+
+[node name="Activity" parent="leftPage/sect2" instance=ExtResource("4_sd4w2")]
+layout_mode = 2
+
+[node name="sect3" type="VBoxContainer" parent="leftPage"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="leftPage/sect3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.548963, 0.548963, 0.548963, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+text = "16.00 - 20.00"
+
+[node name="Activity" parent="leftPage/sect3" instance=ExtResource("4_sd4w2")]
+layout_mode = 2
+
+[node name="sect4" type="VBoxContainer" parent="leftPage"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Label" type="Label" parent="leftPage/sect4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.548963, 0.548963, 0.548963, 1)
+theme_override_fonts/font = ExtResource("2_g6wim")
+text = "20.00 - 00.00"
+
+[node name="Activity" parent="leftPage/sect4" instance=ExtResource("4_sd4w2")]
+layout_mode = 2
+
+[connection signal="pressed" from="rightPage/startDay" to="." method="_on_start_day_pressed"]
