@@ -8,7 +8,7 @@ var duration = 1
 var direction = -1
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	camPos = Vector2(-207, 461)
+	UnlimitedRulebook.apartmentScene = self
 	pass # Replace with function body.
 
 
@@ -60,12 +60,17 @@ func _on_teleport_to_cafe_interior_body_entered(body):
 		destination = Vector2(22, 501)
 		duration = 1
 		direction = -1
+		UnlimitedRulebook.cafeMode = true
 	pass # Replace with function body.
 
 
 func _on_tp_timer_timeout():
 	UnlimitedRulebook.nonActionPlayer.era_walk(duration, direction)
 	UnlimitedRulebook.nonActionPlayer.global_position = destination
+	if UnlimitedRulebook.cafeMode:
+		$CafeDesignHud.visible = true
+	else:
+		$CafeDesignHud.visible = false
 	pass # Replace with function body.
 
 
@@ -76,6 +81,7 @@ func _on_teleport_to_house_door_body_entered(body):
 		destination = Vector2(217, 78)
 		duration = 1
 		direction = -1
+		UnlimitedRulebook.cafeMode = false
 	pass # Replace with function body.
 
 
@@ -88,4 +94,10 @@ func _on_book_area_body_entered(body):
 func _on_book_area_body_exited(body):
 	if body.is_in_group("noAcPlayer"):
 		$bookPuller.play_backwards("pull")
+	pass # Replace with function body.
+
+
+func _on_cafe_garden_body_entered(body):
+	if body.is_in_group("noAcPlayer"):
+		camPos = Vector2(-688, 460)
 	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bii5j03m1tixd"]
+[gd_scene load_steps=89 format=3 uid="uid://bii5j03m1tixd"]
 
 [ext_resource type="Shader" path="res://testShder.gdshader" id="2_26h4s"]
 [ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="2_ifonj"]
@@ -307,17 +307,6 @@ size = Vector2(72, 269.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xytv1"]
 size = Vector2(214, 6)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o6pjg"]
-shader = ExtResource("2_26h4s")
-shader_parameter/brightness = 0.0
-shader_parameter/contrast = 1.0
-shader_parameter/saturation = 1.0
-shader_parameter/redVal = 1.0
-shader_parameter/greenVal = 1.0
-shader_parameter/blueVal = 1.0
-shader_parameter/tint_color = Color(1, 1, 1, 1)
-shader_parameter/tint_effect_factor = 0.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60s47"]
 size = Vector2(29, 2)
 
@@ -367,6 +356,43 @@ color = Color(0.67069, 0.67069, 0.67069, 1)
 color_ramp = SubResource("GradientTexture1D_wcrwj")
 hue_variation_curve = SubResource("CurveTexture_pv6fr")
 turbulence_enabled = true
+
+[sub_resource type="Animation" id="Animation_g64uk"]
+resource_name = "fade"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("halfFadeLayer/bigBlackRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_sc7ww"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("halfFadeLayer/bigBlackRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ifkqm"]
+_data = {
+"RESET": SubResource("Animation_sc7ww"),
+"fade": SubResource("Animation_g64uk")
+}
 
 [node name="streetSceneMain" type="Node2D"]
 material = SubResource("ShaderMaterial_a81nm")
@@ -647,12 +673,6 @@ shape = SubResource("RectangleShape2D_xytv1")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-1150, 251, -1150, 257, -1128, 257)
 
-[node name="shaderRect" type="ColorRect" parent="."]
-visible = false
-material = SubResource("ShaderMaterial_o6pjg")
-offset_right = 540.0
-offset_bottom = 270.0
-
 [node name="actionCamera" type="Camera2D" parent="."]
 position = Vector2(192, 135)
 limit_left = -1361
@@ -786,5 +806,19 @@ process_material = SubResource("ParticleProcessMaterial_nr21x")
 lifetime = 30.0
 
 [node name="countdown" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="halfFader" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ifkqm")
+}
+
+[node name="halfFadeLayer" type="CanvasLayer" parent="."]
+
+[node name="bigBlackRect" type="ColorRect" parent="halfFadeLayer"]
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0, 0, 0, 0)
 
 [connection signal="timeout" from="countdown" to="." method="_on_countdown_timeout"]
+[connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]

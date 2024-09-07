@@ -8,22 +8,25 @@ func _ready():
 	$leftPage/sect2/Activity.activityNum = 2
 	$leftPage/sect3/Activity.activityNum = 3
 	$leftPage/sect4/Activity.activityNum = 4
+	if UnlimitedRulebook.actirray[$leftPage/sect1/Activity.activityNum-1] != "empty":
+			$leftPage/sect1/Activity/selectActivity.text = UnlimitedRulebook.actirray[$leftPage/sect1/Activity.activityNum-1]
+	if UnlimitedRulebook.actirray[$leftPage/sect2/Activity.activityNum-1] != "empty":
+			$leftPage/sect2/Activity/selectActivity.text = UnlimitedRulebook.actirray[$leftPage/sect2/Activity.activityNum-1]
+	if UnlimitedRulebook.actirray[$leftPage/sect3/Activity.activityNum-1] != "empty":
+			$leftPage/sect3/Activity/selectActivity.text = UnlimitedRulebook.actirray[$leftPage/sect3/Activity.activityNum-1]
+	if UnlimitedRulebook.actirray[$leftPage/sect4/Activity.activityNum-1] != "empty":
+			$leftPage/sect4/Activity/selectActivity.text = UnlimitedRulebook.actirray[$leftPage/sect4/Activity.activityNum-1]
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$rightPage/sect2/physicalHealth.text = str(UnlimitedRulebook.physical) + "/5"
+	$rightPage/sect3/mentalHealth.text = str(UnlimitedRulebook.mental) + "/5"
+	$rightPage/sect1/money.text = str(UnlimitedRulebook.money) + "$"
 	pass
 
 
 func _on_start_day_pressed():
-	do_next_acti()
+	UnlimitedRulebook._do_next_activity()
 	pass # Replace with function body.
-
-func do_next_acti():
-	if UnlimitedRulebook.currActi < 3:
-		if !UnlimitedRulebook.actirray.has("empty"):
-			match UnlimitedRulebook.actirray[UnlimitedRulebook.currActi]:
-				"Hunt":
-					get_tree().change_scene_to_file("res://street_scene_main.tscn")
-			pass

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb8s77rbjg0i2"]
+[gd_scene load_steps=4 format=3 uid="uid://bb8s77rbjg0i2"]
 
 [ext_resource type="Theme" uid="uid://2dip1rniy10o" path="res://activitytheme.tres" id="1_n0cin"]
 [ext_resource type="Script" path="res://activity.gd" id="1_qufu8"]
+[ext_resource type="Texture2D" uid="uid://cnwbryww8jljh" path="res://Sprites/cross.png" id="3_s45px"]
 
 [node name="Activity" type="Control"]
 layout_mode = 3
@@ -19,7 +20,6 @@ anchor_right = 1.0
 offset_bottom = 20.0
 grow_horizontal = 2
 theme = ExtResource("1_n0cin")
-text = "???"
 
 [node name="activityList" type="PopupMenu" parent="."]
 size = Vector2i(86, 96)
@@ -32,6 +32,16 @@ item_2/text = "Shop"
 item_2/id = 2
 item_3/text = "Rest"
 item_3/id = 3
+
+[node name="cross" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -2.0
+offset_top = -10.0
+offset_right = 108.0
+offset_bottom = 30.0
+texture = ExtResource("3_s45px")
+stretch_mode = 3
 
 [connection signal="pressed" from="selectActivity" to="." method="_on_select_activity_pressed"]
 [connection signal="focus_exited" from="activityList" to="." method="_on_activity_list_focus_exited"]

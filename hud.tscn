@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8dc0x42kkjr2"]
+[gd_scene load_steps=13 format=3 uid="uid://c8dc0x42kkjr2"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_bav8f"]
 [ext_resource type="Texture2D" uid="uid://dblu4r6buen3l" path="res://Sprites/hpBarEmpty.png" id="1_xy168"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://chxhf2jobgd3a" path="res://Sprites/staminaBar.png" id="4_g8s3k"]
 [ext_resource type="Texture2D" uid="uid://p0138p0mg70o" path="res://Sprites/loveViness.png" id="5_4q583"]
 [ext_resource type="Texture2D" uid="uid://3staabhd72n1" path="res://Sprites/loveThumper.png" id="6_flab5"]
+[ext_resource type="Texture2D" uid="uid://cjmb0o7mnpysg" path="res://Sprites/cock.png" id="8_p0fk7"]
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="9_wn27w"]
 
 [sub_resource type="Animation" id="Animation_l4xwd"]
 length = 0.001
@@ -92,5 +94,26 @@ libraries = {
 
 [node name="beatTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="ClockTexture" type="TextureRect" parent="."]
+offset_left = 412.0
+offset_right = 480.0
+offset_bottom = 40.0
+texture = ExtResource("8_p0fk7")
+
+[node name="timeLabel" type="Label" parent="ClockTexture"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.044
+anchor_top = 0.175
+anchor_right = 0.956
+anchor_bottom = 0.925
+offset_left = 0.00799966
+offset_right = -0.00800323
+offset_bottom = -4.0
+theme_override_fonts/font = ExtResource("9_wn27w")
+text = "120"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="beatTimer" to="." method="_on_beat_timer_timeout"]

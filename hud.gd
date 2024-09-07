@@ -13,6 +13,7 @@ func _ready():
 func _process(_delta):
 	$staminaBar.value = UnlimitedRulebook.actionPlayer.stamina
 	$hpBar.value = UnlimitedRulebook.actionPlayer.health
+	$ClockTexture/timeLabel.text = str(round(UnlimitedRulebook.streetScene.get_node("countdown").time_left))
 	pass
 
 

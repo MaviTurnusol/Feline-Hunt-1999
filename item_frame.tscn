@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cygk6mo51rmnf"]
+
+[ext_resource type="Texture2D" uid="uid://cnhb6rvvq7jpm" path="res://Sprites/itemFrame.png" id="1_iwmc8"]
+[ext_resource type="Script" path="res://item_frame.gd" id="1_uu68r"]
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="2_gcp1t"]
+[ext_resource type="Texture2D" uid="uid://cgdycyug7o44e" path="res://Sprites/itemFramePressed.png" id="3_ii7bp"]
+[ext_resource type="Texture2D" uid="uid://dd1o75oedcu7f" path="res://Sprites/barChair.png" id="3_p7aer"]
+
+[node name="ItemFrame" type="Control"]
+custom_minimum_size = Vector2(140, 80)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -340.0
+offset_bottom = -190.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_uu68r")
+
+[node name="frameTexture" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 80.0
+mouse_filter = 1
+texture_normal = ExtResource("1_iwmc8")
+texture_pressed = ExtResource("3_ii7bp")
+
+[node name="itemTexture" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 140.0
+offset_bottom = 55.0
+mouse_filter = 2
+texture = ExtResource("3_p7aer")
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 53.0
+offset_right = 133.0
+offset_bottom = 79.0
+mouse_filter = 2
+alignment = 1
+
+[node name="name" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.462745, 0.435294, 0.407843, 1)
+theme_override_fonts/font = ExtResource("2_gcp1t")
+text = "Bar Chair"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="button_down" from="frameTexture" to="." method="_on_frame_texture_button_down"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
