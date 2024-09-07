@@ -25,7 +25,7 @@ var acti3 = "Rest"
 var acti4 = "Rest"
 var actirray = ["Rest", "Rest", "Rest", "Rest"]
 var currActi = 0
-var huntDuration = 10
+var huntDuration = 120
 var deltaHuntConstant = 0
 
 var bpm := 100.0
@@ -51,7 +51,7 @@ func _process(delta):
 		if element >= currActi:
 			if actirray[element] == "Hunt":
 				huntStarted = true
-				huntDuration += 10
+				huntDuration += 120
 			if huntStarted && actirray[element] != "Hunt":
 				return
 	pass
