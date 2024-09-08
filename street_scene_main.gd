@@ -26,6 +26,8 @@ func _on_half_fader_animation_finished(anim_name):
 	if gonnaSkip:
 		UnlimitedRulebook.currActi += UnlimitedRulebook.huntDuration/120
 		UnlimitedRulebook.deltaHuntConstant += 1
+		UnlimitedRulebook.catSpawnerArray.clear()
+		UnlimitedRulebook.catArray.clear()
 		UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
 		UnlimitedRulebook.load_game(UnlimitedRulebook.currSave)
 	pass # Replace with function body.

@@ -1,0 +1,149 @@
+[gd_scene load_steps=18 format=3 uid="uid://cpib1t0otqf4u"]
+
+[ext_resource type="Script" path="res://eating_scene.gd" id="1_hc4kh"]
+[ext_resource type="Texture2D" uid="uid://cylfo8eqmnaxt" path="res://Sprites/eatingen.png" id="1_kiuq6"]
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="2_qxu56"]
+[ext_resource type="Texture2D" uid="uid://bddwfms7k06lj" path="res://Sprites/bread.png" id="4_lxg7v"]
+[ext_resource type="Texture2D" uid="uid://cr1sxtji3djwl" path="res://Sprites/rarebread.png" id="5_raedc"]
+[ext_resource type="Texture2D" uid="uid://b7346lot31ejg" path="res://Sprites/epicbread.png" id="6_uv7dq"]
+[ext_resource type="Texture2D" uid="uid://jxr5j7332a8h" path="res://Sprites/legendarybread.png" id="7_xtees"]
+[ext_resource type="Texture2D" uid="uid://pi44640y3sx3" path="res://Sprites/cosmicbread.png" id="8_r04ib"]
+[ext_resource type="Texture2D" uid="uid://caoko0iyq3cm0" path="res://Sprites/flippedbread.png" id="9_6ind7"]
+[ext_resource type="Texture2D" uid="uid://dw82a1mslfcxf" path="res://Sprites/antibread.png" id="10_5iooe"]
+[ext_resource type="Texture2D" uid="uid://medqhsedsoc7" path="res://Sprites/uraniumbread.png" id="11_pkvv6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlmr3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvn22"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_fo5k5"]
+ItemList/colors/font_color = Color(0.791999, 0.791999, 0.791999, 1)
+ItemList/constants/h_separation = 12
+ItemList/fonts/font = ExtResource("2_qxu56")
+ItemList/styles/focus = SubResource("StyleBoxFlat_mlmr3")
+ItemList/styles/panel = SubResource("StyleBoxFlat_gvn22")
+
+[sub_resource type="Animation" id="Animation_y0rrs"]
+resource_name = "opening"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bigBlackRectangle:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a52p6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bigBlackRectangle:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0xuq5"]
+_data = {
+"RESET": SubResource("Animation_a52p6"),
+"opening": SubResource("Animation_y0rrs")
+}
+
+[node name="eatingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hc4kh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_kiuq6")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 208.0
+offset_bottom = 208.0
+
+[node name="ItemList" type="ItemList" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_fo5k5")
+item_count = 8
+item_0/text = "Bread"
+item_0/icon = ExtResource("4_lxg7v")
+item_1/text = "Rare Bread"
+item_1/icon = ExtResource("5_raedc")
+item_2/text = "Epic Bread"
+item_2/icon = ExtResource("6_uv7dq")
+item_3/text = "Legendary Bread"
+item_3/icon = ExtResource("7_xtees")
+item_4/text = "Cosmic Bread"
+item_4/icon = ExtResource("8_r04ib")
+item_5/text = "Flipped Bread"
+item_5/icon = ExtResource("9_6ind7")
+item_6/text = "Anti Bread"
+item_6/icon = ExtResource("10_5iooe")
+item_7/text = "Uranium Bread"
+item_7/icon = ExtResource("11_pkvv6")
+
+[node name="halfFader" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0xuq5")
+}
+autoplay = "opening"
+
+[node name="eat" type="Button" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 212.0
+offset_right = 110.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("2_qxu56")
+text = "Eat"
+
+[node name="info" type="Button" parent="."]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 212.0
+offset_right = 208.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("2_qxu56")
+text = "Info"
+
+[node name="bigBlackRectangle" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="item_selected" from="Panel/ItemList" to="." method="_on_item_list_item_selected"]
+[connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]
+[connection signal="pressed" from="eat" to="." method="_on_eat_pressed"]

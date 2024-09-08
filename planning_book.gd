@@ -21,6 +21,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$title.text = "Day " + str(UnlimitedRulebook.currDay)
+	
+	if UnlimitedRulebook.currActi < 4:
+		if !UnlimitedRulebook.actirray.has("empty"):
+			match UnlimitedRulebook.actirray[UnlimitedRulebook.currActi]:
+				"Hunt":
+					$rightPage/startDay.text = "Begin Hunt"
+				"Rest":
+					$rightPage/startDay.text = "Rest"
+				"Open Cafe":
+					$rightPage/startDay.text = "Open Cafe"
+				"Shop":
+					$rightPage/startDay.text = "Begin Shopping"
+	else:
+		$rightPage/startDay.text = "Feast"
+
 	$rightPage/sect2/physicalHealth.text = str(UnlimitedRulebook.physical) + "/5"
 	$rightPage/sect3/mentalHealth.text = str(UnlimitedRulebook.mental) + "/5"
 	$rightPage/sect1/money.text = str(UnlimitedRulebook.money) + "$"

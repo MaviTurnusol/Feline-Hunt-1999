@@ -21,11 +21,11 @@
 [ext_resource type="Script" path="res://action_camera.gd" id="10_nf62j"]
 [ext_resource type="Texture2D" uid="uid://ubxcov21xdcd" path="res://Sprites/AirVent-Sheet.png" id="10_qfvul"]
 [ext_resource type="Texture2D" uid="uid://4vcrfltumjse" path="res://Sprites/dynasty-Sheet.png" id="12_38prv"]
-[ext_resource type="PackedScene" uid="uid://b3tw2y42jlg88" path="res://gato.tscn" id="12_j0wye"]
 [ext_resource type="Texture2D" uid="uid://b13tunhvguywu" path="res://Sprites/firestairsbalconystuff.png" id="23_c13ee"]
 [ext_resource type="Texture2D" uid="uid://dh5q8cr7un8fq" path="res://Sprites/sucksy.png" id="24_4a10e"]
 [ext_resource type="Shader" path="res://bushSwayTest.gdshader" id="25_fxwy7"]
 [ext_resource type="Texture2D" uid="uid://tt0db8bb586v" path="res://Sprites/bush.png" id="26_b7g76"]
+[ext_resource type="PackedScene" uid="uid://byak3noh7fmvw" path="res://cat_spawner.tscn" id="27_qcce4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a81nm"]
 shader = ExtResource("2_26h4s")
@@ -981,7 +981,7 @@ drag_bottom_margin = 1.0
 script = ExtResource("10_nf62j")
 
 [node name="characterAction" parent="." instance=ExtResource("3_xdbv1")]
-position = Vector2(1036, 106)
+position = Vector2(-1321, 227)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1241,15 +1241,6 @@ shape = SubResource("RectangleShape2D_lpf56")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_f1emj")
 
-[node name="Gato" parent="." instance=ExtResource("12_j0wye")]
-position = Vector2(482, 114)
-
-[node name="Gato2" parent="." instance=ExtResource("12_j0wye")]
-position = Vector2(56, 246)
-
-[node name="Gato3" parent="." instance=ExtResource("12_j0wye")]
-position = Vector2(218, 122)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
@@ -1288,6 +1279,66 @@ material = SubResource("ShaderMaterial_oi0eb")
 position = Vector2(712, 215)
 texture = ExtResource("26_b7g76")
 centered = false
+
+[node name="catSpawner2" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(-1039, 188)
+
+[node name="catSpawner4" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(-868, 184)
+
+[node name="catSpawner6" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(-676, 181)
+
+[node name="catSpawner8" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(-500, 181)
+
+[node name="catSpawner9" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(-308, 230)
+
+[node name="catSpawner10" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(-94, 232)
+
+[node name="catSpawner11" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(109, 97)
+
+[node name="catSpawner12" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(40, 67)
+
+[node name="catSpawner13" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(144, 65)
+
+[node name="catSpawner14" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(14, 241)
+
+[node name="catSpawner15" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(286, 62)
+
+[node name="catSpawner16" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(420, 61)
+
+[node name="catSpawner17" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(365, 121)
+
+[node name="catSpawner18" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(370, 190)
+
+[node name="catSpawner19" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(619, 243)
+
+[node name="catSpawner20" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(846, 235)
+
+[node name="catSpawner21" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(1049, 121)
+
+[node name="catSpawner22" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(1320, 100)
+
+[node name="catSpawner23" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(772, 40)
+
+[node name="catSpawner24" parent="." instance=ExtResource("27_qcce4")]
+position = Vector2(800, 120)
 
 [connection signal="timeout" from="countdown" to="." method="_on_countdown_timeout"]
 [connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]
