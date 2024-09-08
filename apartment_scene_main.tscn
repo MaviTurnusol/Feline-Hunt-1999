@@ -344,7 +344,7 @@ shape = SubResource("RectangleShape2D_m5fdc")
 [node name="CharacterNonAction" parent="." groups=["noAcPlayer"] instance=ExtResource("2_n8285")]
 z_index = 1
 use_parent_material = true
-position = Vector2(-360, 77)
+position = Vector2(-289, 78)
 
 [node name="cam" type="Camera2D" parent="."]
 position = Vector2(-208, 470)

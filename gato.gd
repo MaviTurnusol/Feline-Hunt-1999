@@ -143,7 +143,6 @@ func _physics_process(delta):
 				$grabToggle.play("toggle")
 				grabToggled = true
 			grabValue += delta * 125
-			print(grabValue)
 		elif Input.is_action_just_released("interact"):
 			$grabToggle.play_backwards("toggle")
 			grabToggled = false
