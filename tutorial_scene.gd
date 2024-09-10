@@ -4,6 +4,7 @@ var tutu = true
 var gonnaChange = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicBook.changeMusicTo(MusicBook.tutorial)
 	$halfFader.play_backwards("fade")
 	$Gato.state = "standing"
 	pass # Replace with function body.

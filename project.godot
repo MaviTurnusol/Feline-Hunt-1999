@@ -21,6 +21,7 @@ UnlimitedRulebook="*res://UnlimitedRulebook.gd"
 Furnituredb="*res://furnituredb.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Transition="*res://transition.gd"
+MusicBook="*res://music_book.tscn"
 
 [dialogue_manager]
 

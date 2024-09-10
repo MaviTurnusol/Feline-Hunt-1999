@@ -47,6 +47,7 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("left click"):
 		if !isPlaced && collidingArray.is_empty() && puttable:
+			$AudioStreamPlayer2D.play()
 			isPlaced = true
 			var pos : Vector2 = global_position
 			UnlimitedRulebook.furniturePositionDictionary[displayName + str(nbtNumber)] = [displayName, pos, scale.x, nbtNumber]

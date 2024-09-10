@@ -1,0 +1,92 @@
+[gd_scene load_steps=13 format=3 uid="uid://dapjhrcd31fqy"]
+
+[ext_resource type="Shader" path="res://bordertest.gdshader" id="1_jch26"]
+[ext_resource type="Shader" path="res://fogtest.gdshader" id="1_obmog"]
+
+[sub_resource type="Gradient" id="Gradient_x17h1"]
+offsets = PackedFloat32Array(0.262295, 0.713115)
+colors = PackedColorArray(0.266575, 0.266575, 0.266575, 1, 0.537011, 0.537011, 0.537011, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wcrwj"]
+gradient = SubResource("Gradient_x17h1")
+
+[sub_resource type="Curve" id="Curve_jktvm"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pv6fr"]
+curve = SubResource("Curve_jktvm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v8wpf"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 270, 1)
+direction = Vector3(-1, 0, 0)
+spread = 61.18
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -61.94
+angular_velocity_max = -61.94
+gravity = Vector3(-98, 20, 0)
+color = Color(0.67069, 0.67069, 0.67069, 1)
+color_ramp = SubResource("GradientTexture1D_wcrwj")
+hue_variation_curve = SubResource("CurveTexture_pv6fr")
+turbulence_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_k5seu"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_udp0x"]
+width = 480
+height = 270
+seamless = true
+seamless_blend_skirt = 0.725
+noise = SubResource("FastNoiseLite_k5seu")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmdjy"]
+shader = ExtResource("1_obmog")
+shader_parameter/density = 0.05
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_udp0x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4pmr"]
+shader = ExtResource("1_jch26")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tex82"]
+size = Vector2(480, 69)
+
+[node name="dreamChaseScene" type="Node2D"]
+
+[node name="floor" type="ColorRect" parent="."]
+offset_top = 201.0
+offset_right = 480.0
+offset_bottom = 270.0
+color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(519, 122)
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_v8wpf")
+lifetime = 10.0
+
+[node name="fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_bmdjy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 480.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_r4pmr")
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="floorStatic" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floorStatic"]
+position = Vector2(240, 235.5)
+shape = SubResource("RectangleShape2D_tex82")

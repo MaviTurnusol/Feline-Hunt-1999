@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://bii5j03m1tixd"]
+[gd_scene load_steps=135 format=3 uid="uid://bii5j03m1tixd"]
 
 [ext_resource type="Shader" path="res://testShder.gdshader" id="2_26h4s"]
 [ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="2_ifonj"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://ubxcov21xdcd" path="res://Sprites/AirVent-Sheet.png" id="10_qfvul"]
 [ext_resource type="Texture2D" uid="uid://4vcrfltumjse" path="res://Sprites/dynasty-Sheet.png" id="12_38prv"]
 [ext_resource type="PackedScene" uid="uid://bwm1t72wna746" path="res://action_camera.tscn" id="14_6qnvo"]
-[ext_resource type="AudioStream" uid="uid://c6d7gp6qqvgnn" path="res://Chikoi The Maid - Injector [Yb1lNnXzJsM].mp3" id="21_wj1ll"]
 [ext_resource type="Texture2D" uid="uid://b13tunhvguywu" path="res://Sprites/firestairsbalconystuff.png" id="23_c13ee"]
 [ext_resource type="Texture2D" uid="uid://dh5q8cr7un8fq" path="res://Sprites/sucksy.png" id="24_4a10e"]
 [ext_resource type="Shader" path="res://bushSwayTest.gdshader" id="25_fxwy7"]
@@ -407,6 +406,8 @@ size = Vector2(8.5, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ed4p"]
 size = Vector2(29, 1)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tj8j8"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60s47"]
 size = Vector2(29, 2)
 
@@ -459,7 +460,7 @@ size = Vector2(75, 34.5)
 offsets = PackedFloat32Array(0.262295, 0.713115)
 colors = PackedColorArray(0.266575, 0.266575, 0.266575, 1, 0.537011, 0.537011, 0.537011, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_wcrwj"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_leicc"]
 gradient = SubResource("Gradient_uddeq")
 
 [sub_resource type="Curve" id="Curve_pqa30"]
@@ -467,7 +468,7 @@ min_value = -1.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_pv6fr"]
+[sub_resource type="CurveTexture" id="CurveTexture_bh230"]
 curve = SubResource("Curve_pqa30")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nr21x"]
@@ -477,8 +478,8 @@ emission_box_extents = Vector3(480, 270, 1)
 spread = 61.18
 gravity = Vector3(-98, 20, 0)
 color = Color(0.67069, 0.67069, 0.67069, 1)
-color_ramp = SubResource("GradientTexture1D_wcrwj")
-hue_variation_curve = SubResource("CurveTexture_pv6fr")
+color_ramp = SubResource("GradientTexture1D_leicc")
+hue_variation_curve = SubResource("CurveTexture_bh230")
 turbulence_enabled = true
 
 [sub_resource type="Animation" id="Animation_sc7ww"]
@@ -529,6 +530,9 @@ shader_parameter/detail = 1.0
 shader_parameter/distortion = 0.0
 shader_parameter/heightOffset = 0.0
 shader_parameter/offset = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svn8c"]
+size = Vector2(1, 65)
 
 [node name="streetSceneMain" type="Node2D"]
 material = SubResource("ShaderMaterial_a81nm")
@@ -973,6 +977,7 @@ shape = SubResource("RectangleShape2D_7ed4p")
 one_way_collision = true
 
 [node name="actionCamera" parent="." instance=ExtResource("14_6qnvo")]
+noise = SubResource("FastNoiseLite_tj8j8")
 
 [node name="characterAction" parent="." instance=ExtResource("3_xdbv1")]
 position = Vector2(-1321, 227)
@@ -1232,12 +1237,6 @@ shape = SubResource("RectangleShape2D_dsbmh")
 position = Vector2(648.5, 23.25)
 shape = SubResource("RectangleShape2D_lpf56")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("21_wj1ll")
-volume_db = -20.0
-autoplay = true
-parameters/looping = true
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
@@ -1336,6 +1335,14 @@ position = Vector2(772, 40)
 
 [node name="catSpawner24" parent="." instance=ExtResource("27_qcce4")]
 position = Vector2(800, 120)
+
+[node name="climbableSurface2" parent="." instance=ExtResource("9_lkdun")]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="climbableSurface2"]
+position = Vector2(678.5, 150.5)
+shape = SubResource("RectangleShape2D_svn8c")
 
 [connection signal="timeout" from="countdown" to="." method="_on_countdown_timeout"]
 [connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]

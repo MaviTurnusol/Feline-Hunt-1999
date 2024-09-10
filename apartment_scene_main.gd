@@ -8,6 +8,7 @@ var duration = 1
 var direction = -1
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicBook.changeMusicTo(MusicBook.apartment)
 	UnlimitedRulebook.apartmentScene = self
 	if UnlimitedRulebook.enteringFromGarden:
 		entering(1, 1, Vector2(-958, 501))

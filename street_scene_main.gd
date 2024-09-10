@@ -4,6 +4,7 @@ var gonnaSkip = false
 var tutu = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicBook.changeMusicTo(MusicBook.street)
 	UnlimitedRulebook.health = UnlimitedRulebook.physical*20
 	gonnaSkip = false
 	UnlimitedRulebook.streetScene = self

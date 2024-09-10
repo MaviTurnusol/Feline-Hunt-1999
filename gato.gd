@@ -20,6 +20,9 @@ func set_grabval(value):
 		grabValue = 100
 		if state != "tossed":
 			state = "tossed"
+			$boom.play()
+			UnlimitedRulebook.cam.add_trauma(0.5)
+			OS.delay_msec(30)
 			if !tutorial:
 				UnlimitedRulebook.catCount += 1
 				UnlimitedRulebook.catsGained += 1

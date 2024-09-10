@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://t41eq0yiueh3"]
+[gd_scene load_steps=85 format=3 uid="uid://t41eq0yiueh3"]
 
 [ext_resource type="Texture2D" uid="uid://b5k2qgih6jt08" path="res://Sprites/parallaxLayer2.png" id="1_6mbmp"]
 [ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="1_7x8kw"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://ceetscnm00wwo" path="res://Sprites/blackCatTailDance-Sheet.png" id="14_iylbm"]
 [ext_resource type="Texture2D" uid="uid://b75rpwd0uo37t" path="res://Sprites/blackCatSleeping-Sheet.png" id="15_xrhjt"]
 [ext_resource type="Texture2D" uid="uid://dmi4ykl8vm4qi" path="res://Sprites/blackCatChecking-Sheet.png" id="16_epm51"]
-[ext_resource type="AudioStream" uid="uid://c81j5pvk2en7s" path="res://Chikoi-The-Maid-Nii-san-_dbHWRD9aGSk_.mp3" id="17_h5a1u"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_07nct"]
 shader = ExtResource("1_bq86h")
@@ -785,12 +784,6 @@ sprite_frames = SubResource("SpriteFrames_5gmwy")
 autoplay = "default"
 frame_progress = 0.516831
 flip_h = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_h5a1u")
-volume_db = -20.0
-autoplay = true
-parameters/looping = true
 
 [connection signal="body_entered" from="kitchenArea" to="." method="_on_kitchen_area_body_entered"]
 [connection signal="body_exited" from="kitchenArea" to="." method="_on_kitchen_area_body_exited"]

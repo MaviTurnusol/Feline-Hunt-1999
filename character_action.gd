@@ -115,6 +115,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = direction * 175
 		if $anima.frame == 10:
+			position.y -= 9
 			isCatching = false
 	else:
 		$standingCol.disabled = false

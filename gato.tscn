@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://b3tw2y42jlg88"]
+[gd_scene load_steps=95 format=3 uid="uid://b3tw2y42jlg88"]
 
 [ext_resource type="Texture2D" uid="uid://dmi4ykl8vm4qi" path="res://Sprites/blackCatChecking-Sheet.png" id="1_78ijb"]
 [ext_resource type="Script" path="res://gato.gd" id="1_p80mv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ceqr18we8w0ho" path="res://Sprites/blackCatGoToSleep-Sheet.png" id="7_lfxg6"]
 [ext_resource type="Texture2D" uid="uid://c6wi5i7v5vswn" path="res://Sprites/catBarEmpty.png" id="10_62gtu"]
 [ext_resource type="Texture2D" uid="uid://bqeplo7isa4wp" path="res://Sprites/catBarFilled.png" id="11_5ilo1"]
+[ext_resource type="AudioStream" uid="uid://bq2ndlxfxmid6" path="res://explosion.wav" id="12_po5mx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_khgtf"]
 resource_local_to_scene = true
@@ -709,7 +710,7 @@ shape = SubResource("RectangleShape2D_52lpf")
 
 [node name="jumpCast" type="RayCast2D" parent="sightMarker"]
 target_position = Vector2(54, -55)
-collision_mask = 2
+collision_mask = 10
 
 [node name="moveDownTimer" type="Timer" parent="."]
 one_shot = true
@@ -745,6 +746,9 @@ texture_progress = ExtResource("11_5ilo1")
 libraries = {
 "": SubResource("AnimationLibrary_exeu4")
 }
+
+[node name="boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_po5mx")
 
 [connection signal="timeout" from="stateTimer" to="." method="_on_state_timer_timeout"]
 [connection signal="body_entered" from="sightMarker/sightAreaLarge" to="." method="_on_sight_area_large_body_entered"]

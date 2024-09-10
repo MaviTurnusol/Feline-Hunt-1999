@@ -3,6 +3,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicBook.changeMusicTo(MusicBook.menu)
 	pass # Replace with function body.
 
 
@@ -45,18 +46,21 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_button_mouse_entered():
+	$AudioStreamPlayer.play()
 	var posTween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	posTween.tween_property($Button, "position", Vector2(11, 152), 0.25)
 	pass # Replace with function body.
 
 
 func _on_button_2_mouse_entered():
+	$AudioStreamPlayer.play()
 	var posTween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	posTween.tween_property($Button2, "position", Vector2(11, 188), 0.25)
 	pass # Replace with function body.
 
 
 func _on_button_3_mouse_entered():
+	$AudioStreamPlayer.play()
 	var posTween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 	posTween.tween_property($Button3, "position", Vector2(11, 223), 0.25)
 	pass # Replace with function body.

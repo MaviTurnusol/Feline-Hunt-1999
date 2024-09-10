@@ -13,6 +13,7 @@ var streetScene
 var apartmentScene
 var catSpawnerArray = []
 var catArray = []
+var cam
 #stats -> not constant
 var physical = 3 : set = set_physical
 var mental = 3 : set = set_mental
