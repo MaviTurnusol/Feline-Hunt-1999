@@ -13,10 +13,10 @@ func _ready():
 		entering(1, 1, Vector2(-958, 501))
 		UnlimitedRulebook.enteringFromGarden = false
 	for item in UnlimitedRulebook.furniturePositionDictionary:
-		print(UnlimitedRulebook.furniturePositionDictionary[item][1])
+		print(UnlimitedRulebook.furniturePositionDictionary[item])
 		if UnlimitedRulebook.furniturePositionDictionary[item][1] is String:
 			UnlimitedRulebook.furniturePositionDictionary[item][1] = string_to_vector2(UnlimitedRulebook.furniturePositionDictionary[item][1])
-		Furnituredb.spawn_furniture_placed(UnlimitedRulebook.furniturePositionDictionary[item][0], UnlimitedRulebook.furniturePositionDictionary[item][1])
+		Furnituredb.spawn_furniture_placed(UnlimitedRulebook.furniturePositionDictionary[item][0], UnlimitedRulebook.furniturePositionDictionary[item][1], UnlimitedRulebook.furniturePositionDictionary[item][2], UnlimitedRulebook.furniturePositionDictionary[item][3])
 	pass # Replace with function body.
 
 static func string_to_vector2(string := "") -> Vector2:
@@ -36,6 +36,13 @@ func _process(delta):
 	
 	if camFollowPlayer:
 		camPos = UnlimitedRulebook.nonActionPlayer.global_position
+	
+	if UnlimitedRulebook.catCount >= 10:
+		$gatoUp.visible = true
+	if UnlimitedRulebook.catCount >= 20:
+		$gatoSleep.visible = true
+	if UnlimitedRulebook.catCount >= 30:
+		$gatoThree.visible = true
 
 func _on_kitchen_area_body_entered(body):
 	if body.is_in_group("noAcPlayer"):

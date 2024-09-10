@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b1fipq55s84wj"]
+[gd_scene load_steps=39 format=3 uid="uid://b1fipq55s84wj"]
 
 [ext_resource type="Script" path="res://tutorial_scene.gd" id="1_206tp"]
 [ext_resource type="Texture2D" uid="uid://dq4r1xlfi23db" path="res://Sprites/tutorialStreet.png" id="1_810uc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Shader" path="res://fogtest.gdshader" id="14_n2tbq"]
 [ext_resource type="PackedScene" uid="uid://b3tw2y42jlg88" path="res://gato.tscn" id="15_om64j"]
 [ext_resource type="Shader" path="res://bordertest.gdshader" id="17_upvus"]
+[ext_resource type="AudioStream" uid="uid://dtp4hkeiyyprt" path="res://Chikoi The Maid - Breather [vYZSnhSlzoA].mp3" id="18_efid0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3r4iw"]
 size = Vector2(1607, 20)
@@ -74,6 +75,21 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_udp0x")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_05yao"]
 shader = ExtResource("17_upvus")
 
+[sub_resource type="Animation" id="Animation_ddw45"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/bigBlackRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_l5y0p"]
 resource_name = "fade"
 length = 1.2
@@ -90,21 +106,6 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_ddw45"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer2/bigBlackRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ge11e"]
 _data = {
 "RESET": SubResource("Animation_ddw45"),
@@ -119,8 +120,8 @@ texture = ExtResource("1_810uc")
 centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 5
-collision_mask = 5
+collision_layer = 13
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(731.5, 267)
@@ -312,5 +313,11 @@ color = Color(0, 0, 0, 0)
 libraries = {
 "": SubResource("AnimationLibrary_ge11e")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_efid0")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]

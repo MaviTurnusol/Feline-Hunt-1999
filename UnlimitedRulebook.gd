@@ -39,8 +39,9 @@ var huntDuration = 120
 var deltaHuntConstant = 0
 var enteringFromGarden = false
 var cafeIncome
+var isInTransition = false
 
-var bpm := 100.0
+var bpm := 90.0
 
 #global events -> not constant
 var isHandFull = false
@@ -50,6 +51,16 @@ var catsGained = 0
 const SAVE_PATH_1 = "user://save1.json"
 const SAVE_PATH_2 = "user://save2.json"
 const SAVE_PATH_3 = "user://save3.json"
+
+func set_health(value):
+	if value > 100:
+		value = 100
+		health = value
+	elif value < 0:
+		value = 0
+		health = value
+	else:
+		health = value
 
 func set_physical(value):
 	if value > 5:
@@ -135,7 +146,7 @@ func _process(delta):
 	actirray[1] = acti2
 	actirray[2] = acti3
 	actirray[3] = acti4
-	
+	money = round(money)
 	var huntStarted = false
 	huntDuration = 0
 	for element in actirray.size():
@@ -147,14 +158,12 @@ func _process(delta):
 				return
 	pass
 	
-	cafeIncome = round(catCount*furnitureValues*mental*0.1*randf_range(0.5, 2))
 
 func _do_next_activity():
 	if currActi < 4:
 		if !actirray.has("empty"):
 			match actirray[currActi]:
 				"Hunt":
-					physical -= 1
 					get_tree().change_scene_to_file("res://street_scene_main.tscn")
 				"Rest":
 					Transition.endedScene = "Rest"
@@ -164,6 +173,7 @@ func _do_next_activity():
 				"Open Cafe":
 					Transition.endedScene = "Open Cafe"
 					currActi+=1
+					cafeIncome = round(catCount*mental*0.6*randf_range(0.5, 2) + sqrt(furnitureValues*randf_range(0.5, 2)*4))
 					money += cafeIncome
 					save_game(currSave)
 					get_tree().change_scene_to_file("res://transition_scene.tscn")

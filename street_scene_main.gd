@@ -1,8 +1,10 @@
 extends Node2D
 
 var gonnaSkip = false
+var tutu = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	UnlimitedRulebook.health = UnlimitedRulebook.physical*20
 	gonnaSkip = false
 	UnlimitedRulebook.streetScene = self
 	$countdown.wait_time = UnlimitedRulebook.huntDuration
@@ -13,6 +15,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if UnlimitedRulebook.health <= 0:
+		UnlimitedRulebook.catSpawnerArray.clear()
+		UnlimitedRulebook.catArray.clear()
+		Transition.endedScene = "Hospital"
+		get_tree().change_scene_to_file("res://transition_scene.tscn")
+		DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Hospital")
+		UnlimitedRulebook.physical = 1
 	pass
 
 

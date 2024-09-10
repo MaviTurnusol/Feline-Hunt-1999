@@ -17,10 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://cj5vbbkglty0n" path="res://hiding_area.tscn" id="8_ifjmi"]
 [ext_resource type="Texture2D" uid="uid://40viy5sgxoft" path="res://Sprites/FelineTileSetScrshot4.png" id="9_34iqq"]
 [ext_resource type="PackedScene" uid="uid://dtjuft6wc0pjd" path="res://climbable_surface.tscn" id="9_lkdun"]
-[ext_resource type="AudioStream" uid="uid://ceebj1nx6st3e" path="res://Conviction [3Bs6n5np2sM].mp3" id="10_f1emj"]
-[ext_resource type="Script" path="res://action_camera.gd" id="10_nf62j"]
 [ext_resource type="Texture2D" uid="uid://ubxcov21xdcd" path="res://Sprites/AirVent-Sheet.png" id="10_qfvul"]
 [ext_resource type="Texture2D" uid="uid://4vcrfltumjse" path="res://Sprites/dynasty-Sheet.png" id="12_38prv"]
+[ext_resource type="PackedScene" uid="uid://bwm1t72wna746" path="res://action_camera.tscn" id="14_6qnvo"]
+[ext_resource type="AudioStream" uid="uid://c6d7gp6qqvgnn" path="res://Chikoi The Maid - Injector [Yb1lNnXzJsM].mp3" id="21_wj1ll"]
 [ext_resource type="Texture2D" uid="uid://b13tunhvguywu" path="res://Sprites/firestairsbalconystuff.png" id="23_c13ee"]
 [ext_resource type="Texture2D" uid="uid://dh5q8cr7un8fq" path="res://Sprites/sucksy.png" id="24_4a10e"]
 [ext_resource type="Shader" path="res://bushSwayTest.gdshader" id="25_fxwy7"]
@@ -306,7 +306,7 @@ size = Vector2(22, 2)
 size = Vector2(54, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ibap"]
-size = Vector2(72, 269.5)
+size = Vector2(72, 238)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xytv1"]
 size = Vector2(214, 6)
@@ -336,7 +336,7 @@ size = Vector2(2, 24)
 size = Vector2(1, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3f7w"]
-size = Vector2(9.5, 270)
+size = Vector2(9.5, 248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_454mw"]
 size = Vector2(37, 1)
@@ -615,7 +615,7 @@ centered = false
 
 [node name="Dumbelek" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(110, 14)
+position = Vector2(110, 17)
 sprite_frames = SubResource("SpriteFrames_y8134")
 autoplay = "default"
 frame_progress = 0.423402
@@ -636,8 +636,8 @@ autoplay = "default"
 frame_progress = 0.439626
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 5
-collision_mask = 5
+collision_layer = 13
+collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(220, 263.5)
@@ -659,7 +659,7 @@ shape = SubResource("RectangleShape2D_5v3sm")
 one_way_collision = true
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(143, 85.5)
+position = Vector2(143, 90)
 shape = SubResource("RectangleShape2D_2k3oq")
 one_way_collision = true
 
@@ -799,7 +799,7 @@ shape = SubResource("RectangleShape2D_gaslp")
 one_way_collision = true
 
 [node name="CollisionShape2D33" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-1400, 134.75)
+position = Vector2(-1400, 119)
 shape = SubResource("RectangleShape2D_2ibap")
 
 [node name="CollisionShape2D34" type="CollisionShape2D" parent="StaticBody2D"]
@@ -852,7 +852,7 @@ position = Vector2(754.5, 176.5)
 shape = SubResource("RectangleShape2D_oo7je")
 
 [node name="CollisionShape2D44" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1798.25, 135)
+position = Vector2(1798.25, 124)
 shape = SubResource("RectangleShape2D_e3f7w")
 
 [node name="CollisionShape2D45" type="CollisionShape2D" parent="StaticBody2D"]
@@ -972,13 +972,7 @@ position = Vector2(1542.5, 172.5)
 shape = SubResource("RectangleShape2D_7ed4p")
 one_way_collision = true
 
-[node name="actionCamera" type="Camera2D" parent="."]
-position = Vector2(192, 135)
-limit_left = -1361
-limit_right = 1792
-drag_top_margin = 1.0
-drag_bottom_margin = 1.0
-script = ExtResource("10_nf62j")
+[node name="actionCamera" parent="." instance=ExtResource("14_6qnvo")]
 
 [node name="characterAction" parent="." instance=ExtResource("3_xdbv1")]
 position = Vector2(-1321, 227)
@@ -1239,7 +1233,10 @@ position = Vector2(648.5, 23.25)
 shape = SubResource("RectangleShape2D_lpf56")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_f1emj")
+stream = ExtResource("21_wj1ll")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

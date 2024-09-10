@@ -11,12 +11,17 @@ var displayName = "bar chair"
 var texture
 var size := Vector2(17, 19)
 var puttable = true
-
+var nbtNumber
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !spawnPlaced:
 		position = get_global_mouse_position()
-	$area/CollisionShape2D.shape.size = size
+	var collisionshape2d = CollisionShape2D.new()
+	collisionshape2d.shape = RectangleShape2D.new()
+	collisionshape2d.shape.size = size
+	$area.add_child(collisionshape2d)
+	if nbtNumber == null:
+		nbtNumber = randf_range(-128, 128)
 	pass # Replace with function body.
 
 
@@ -24,12 +29,15 @@ func _ready():
 func _process(delta):
 	if texture != null:
 		$sprite.texture = load(texture)
+		
 	if $landCast.is_colliding():
 		if $landCast.get_collider().is_in_group("floor"):
 			position.y = $landCast.get_collision_point().y - size.y/2
 	
 	if !isPlaced:
 		position.x = get_global_mouse_position().x
+		if Input.is_action_just_pressed("interact"):
+			scale.x *= -1
 		if collidingArray.is_empty():
 			modulate = Color(0.667, 1, 1, 0.667)
 		else:
@@ -41,7 +49,7 @@ func _process(delta):
 		if !isPlaced && collidingArray.is_empty() && puttable:
 			isPlaced = true
 			var pos : Vector2 = global_position
-			UnlimitedRulebook.furniturePositionDictionary[displayName] = [displayName, pos]
+			UnlimitedRulebook.furniturePositionDictionary[displayName + str(nbtNumber)] = [displayName, pos, scale.x, nbtNumber]
 			UnlimitedRulebook.furnitureValues += value
 			UnlimitedRulebook.isHandFull = false
 			UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
@@ -69,14 +77,14 @@ func _on_area_input_event(viewport, event, shape_idx):
 				puttable = false
 				$pullTimer.start()
 				UnlimitedRulebook.isHandFull = true
-				UnlimitedRulebook.furniturePositionDictionary.erase(displayName)
+				UnlimitedRulebook.furniturePositionDictionary.erase(displayName + str(nbtNumber))
 				UnlimitedRulebook.furnitureValues -= value
 		if Input.is_action_just_pressed("right click"):
 			if isPlaced && !UnlimitedRulebook.isHandFull:
 				modulate = Color(1, 0.7, 0.7, 0.667)
 				UnlimitedRulebook.furnitureValues -= value
 				UnlimitedRulebook.furnitureInventory.append(displayName)
-				UnlimitedRulebook.furniturePositionDictionary.erase(displayName)
+				UnlimitedRulebook.furniturePositionDictionary.erase(displayName + str(nbtNumber))
 				UnlimitedRulebook.cafeHud.refresh_items()
 				queue_free()
 	pass # Replace with function body.

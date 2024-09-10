@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 var stamina = 100 : set = set_stamina
-var health = 100
 var speed = 100.0
 var isHidden = false
 var isRunning = false
@@ -14,18 +13,19 @@ var direction = 0
 
 func set_stamina(value):
 	if value < 0:
-		health += value
+		UnlimitedRulebook.health += value
 		value = 0
+		stamina = value
+	elif value > 100/6+UnlimitedRulebook.mental*100/6:
+		value = 100/6+UnlimitedRulebook.mental*100/6
 		stamina = value
 	else:
 		stamina = value
 
 func _ready():
 	UnlimitedRulebook.actionPlayer = self
-	health = UnlimitedRulebook.health
 
 func _physics_process(delta):
-	UnlimitedRulebook.health = health
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

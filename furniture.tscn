@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://n4cd5y66kphr"]
+[gd_scene load_steps=3 format=3 uid="uid://n4cd5y66kphr"]
 
 [ext_resource type="Script" path="res://furniture.gd" id="1_ta715"]
 [ext_resource type="Texture2D" uid="uid://dd1o75oedcu7f" path="res://Sprites/barChair.png" id="2_kk5tf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lne2b"]
-size = Vector2(17, 19)
 
 [node name="Furniture" type="Node2D"]
 script = ExtResource("1_ta715")
@@ -13,9 +10,6 @@ script = ExtResource("1_ta715")
 texture = ExtResource("2_kk5tf")
 
 [node name="area" type="Area2D" parent="." groups=["furnitureArea"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="area"]
-shape = SubResource("RectangleShape2D_lne2b")
 
 [node name="landCast" type="RayCast2D" parent="."]
 target_position = Vector2(0, 270)

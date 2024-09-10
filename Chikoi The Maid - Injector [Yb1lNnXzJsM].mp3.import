@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c6d7gp6qqvgnn"
+path="res://.godot/imported/Chikoi The Maid - Injector [Yb1lNnXzJsM].mp3-2f31e1d7dd273cd03e200bcd2c4963ca.mp3str"
+
+[deps]
+
+source_file="res://Chikoi The Maid - Injector [Yb1lNnXzJsM].mp3"
+dest_files=["res://.godot/imported/Chikoi The Maid - Injector [Yb1lNnXzJsM].mp3-2f31e1d7dd273cd03e200bcd2c4963ca.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

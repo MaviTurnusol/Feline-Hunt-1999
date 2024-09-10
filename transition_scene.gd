@@ -10,6 +10,9 @@ func _ready():
 			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Resting")
 		"Tutorial":
 			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Tutorial")
+		"Hospital":
+			print("asijdasd")
+			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Hospital")
 	pass # Replace with function body.
 
 

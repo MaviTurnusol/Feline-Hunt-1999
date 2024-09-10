@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwm1t72wna746"]
+
+[ext_resource type="Script" path="res://action_camera.gd" id="1_pdi2n"]
+
+[node name="actionCamera" type="Camera2D"]
+position = Vector2(192, 135)
+limit_left = -1361
+limit_right = 1792
+drag_top_margin = 1.0
+drag_bottom_margin = 1.0
+script = ExtResource("1_pdi2n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

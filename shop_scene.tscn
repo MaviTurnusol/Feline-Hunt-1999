@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://b2g4qw7br436q"]
 
-[ext_resource type="Texture2D" uid="uid://h5x7nn76n1qu" path="res://Sprites/shopbg.png" id="1_5mkrq"]
 [ext_resource type="Script" path="res://shop_scene.gd" id="1_fjm7y"]
 [ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="2_hanwe"]
+[ext_resource type="Texture2D" uid="uid://vr6iw2uosjh4" path="res://Sprites/shopman.png" id="2_ou62h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vk0j0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -26,6 +26,21 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="Theme" id="Theme_ahk11"]
 ItemList/styles/focus = SubResource("StyleBoxFlat_rjd0m")
 
+[sub_resource type="Animation" id="Animation_p8637"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("bigBlackRectangle:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_cut8x"]
 resource_name = "fade"
 length = 0.6
@@ -40,21 +55,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_p8637"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("bigBlackRectangle:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtwu2"]
@@ -76,14 +76,14 @@ script = ExtResource("1_fjm7y")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_5mkrq")
+texture = ExtResource("2_ou62h")
 
 [node name="TabBar" type="TabBar" parent="."]
 layout_mode = 0
-offset_left = 278.0
-offset_top = 13.0
-offset_right = 470.0
-offset_bottom = 53.0
+offset_left = 298.0
+offset_top = 5.0
+offset_right = 490.0
+offset_bottom = 45.0
 theme = SubResource("Theme_ws6d5")
 theme_override_fonts/font = ExtResource("2_hanwe")
 current_tab = 0
@@ -93,11 +93,12 @@ tab_0/title = "Breads"
 tab_1/title = "Furniture"
 
 [node name="breadPanel" type="Panel" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 277.0
-offset_top = 53.0
-offset_right = 467.0
-offset_bottom = 263.0
+offset_left = 287.0
+offset_top = 45.0
+offset_right = 477.0
+offset_bottom = 230.0
 
 [node name="breadList" type="ItemList" parent="breadPanel"]
 layout_mode = 1
@@ -110,12 +111,11 @@ theme = SubResource("Theme_hb05h")
 theme_override_fonts/font = ExtResource("2_hanwe")
 
 [node name="furniturePanel" type="Panel" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 277.0
-offset_top = 53.0
-offset_right = 467.0
-offset_bottom = 263.0
+offset_left = 287.0
+offset_top = 45.0
+offset_right = 477.0
+offset_bottom = 230.0
 
 [node name="furnitureList" type="ItemList" parent="furniturePanel"]
 layout_mode = 1
@@ -126,10 +126,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ahk11")
 theme_override_fonts/font = ExtResource("2_hanwe")
-item_count = 3
-item_0/text = "chair"
-item_1/text = "table"
-item_2/text = "cock"
 
 [node name="halfFader" type="AnimationPlayer" parent="."]
 libraries = {
@@ -139,40 +135,62 @@ autoplay = "fade"
 
 [node name="Buy" type="Button" parent="."]
 layout_mode = 0
-offset_left = 197.0
-offset_top = 53.0
-offset_right = 274.0
-offset_bottom = 87.0
+offset_left = 287.0
+offset_top = 232.0
+offset_right = 375.0
+offset_bottom = 266.0
 theme_override_fonts/font = ExtResource("2_hanwe")
 text = "BUY"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 198.0
-offset_top = 5.0
-offset_right = 271.0
+offset_left = 242.0
+offset_top = 1.0
+offset_right = 315.0
 offset_bottom = 45.0
 
 [node name="costTitle" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.098, 0.2, 0.098, 1)
+theme_override_colors/font_shadow_color = Color(0.313726, 0.231373, 0.231373, 0.270588)
 theme_override_fonts/font = ExtResource("2_hanwe")
 text = "Cost:"
 horizontal_alignment = 1
 
 [node name="cost" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.095, 0.19, 0.095, 1)
+theme_override_colors/font_shadow_color = Color(0.313726, 0.231373, 0.231373, 0.270588)
 theme_override_fonts/font = ExtResource("2_hanwe")
 text = "0$"
 horizontal_alignment = 1
 
 [node name="Pass" type="Button" parent="."]
 layout_mode = 0
-offset_left = 197.0
-offset_top = 92.0
-offset_right = 274.0
-offset_bottom = 126.0
+offset_left = 383.0
+offset_top = 232.0
+offset_right = 476.0
+offset_bottom = 266.0
 theme_override_fonts/font = ExtResource("2_hanwe")
 text = "LEAVE"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 91.0
+offset_bottom = 40.0
+
+[node name="money" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.792157)
+theme_override_fonts/font = ExtResource("2_hanwe")
+text = "Money Dol"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="bigBlackRectangle" type="ColorRect" parent="."]
 layout_mode = 1
@@ -185,6 +203,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [connection signal="item_selected" from="breadPanel/breadList" to="." method="_on_bread_list_item_selected"]
+[connection signal="item_selected" from="furniturePanel/furnitureList" to="." method="_on_furniture_list_item_selected"]
 [connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
 [connection signal="pressed" from="Pass" to="." method="_on_pass_pressed"]
