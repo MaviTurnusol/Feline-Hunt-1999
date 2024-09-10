@@ -170,7 +170,7 @@ func _do_next_activity():
 					Transition.endedScene = "Rest"
 					currActi+=1
 					save_game(currSave)
-					get_tree().change_scene_to_file("res://transition_scene.tscn")
+					get_tree().change_scene_to_file("res://dream_chase_scene.tscn")
 				"Open Cafe":
 					Transition.endedScene = "Open Cafe"
 					currActi+=1

@@ -11,8 +11,9 @@ func _ready():
 		"Tutorial":
 			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Tutorial")
 		"Hospital":
-			print("asijdasd")
 			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Hospital")
+		"Nightmare":
+			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Nightmare")
 	pass # Replace with function body.
 
 

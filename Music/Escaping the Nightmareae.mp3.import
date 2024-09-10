@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dxj4pyekmgscg"
+path="res://.godot/imported/Escaping the Nightmareae.mp3-f87192b53894b06f5fbcf712cc0e69b2.mp3str"
+
+[deps]
+
+source_file="res://Music/Escaping the Nightmareae.mp3"
+dest_files=["res://.godot/imported/Escaping the Nightmareae.mp3-f87192b53894b06f5fbcf712cc0e69b2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

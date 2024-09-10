@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://opav3qq38yh8"
+path="res://.godot/imported/Dream's Gate, Nightmarish Dances Around The Moon. All Absorbing Nightmareae!.mp3-4af59167402f48c77c351f6293323ecc.mp3str"
+
+[deps]
+
+source_file="res://Music/Dream's Gate, Nightmarish Dances Around The Moon. All Absorbing Nightmareae!.mp3"
+dest_files=["res://.godot/imported/Dream's Gate, Nightmarish Dances Around The Moon. All Absorbing Nightmareae!.mp3-4af59167402f48c77c351f6293323ecc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

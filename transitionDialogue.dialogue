@@ -19,12 +19,20 @@ set UnlimitedRulebook.physical = UnlimitedRulebook.physical + 1
 do Transition.enter_from_garden()
 
 ~ Resting
-Lying in a sofa is fun
+That was a good sleep!
+Guess I was so tired that I didn't even have a dream.
 Mental increased
 Physical health increased
 set UnlimitedRulebook.mental = UnlimitedRulebook.mental + 1
 set UnlimitedRulebook.physical = UnlimitedRulebook.physical + 1
-do Transition.enter_from_garden()
+do Transition.enter_from_kitchen()
+
+~ Nightmare
+What was that?! I was a cat, and i was escaping
+I don't want to leave the house today
+Mental decreased
+set UnlimitedRulebook.mental = UnlimitedRulebook.mental - 1
+do Transition.enter_from_kitchen()
 
 ~ Tutorial
 That was... Surely a weird dream
