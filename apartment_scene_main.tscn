@@ -52,6 +52,9 @@ size = Vector2(1, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvl46"]
 size = Vector2(480, 270)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdmc2"]
+size = Vector2(521, 109)
+
 [sub_resource type="Animation" id="Animation_q6tph"]
 length = 0.001
 tracks/0/type = "value"
@@ -133,9 +136,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmfxa"]
 size = Vector2(13, 21)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdmc2"]
-size = Vector2(480, 109)
 
 [sub_resource type="Animation" id="Animation_b8m5m"]
 length = 0.001
@@ -344,7 +344,7 @@ shape = SubResource("RectangleShape2D_m5fdc")
 [node name="CharacterNonAction" parent="." groups=["noAcPlayer"] instance=ExtResource("2_n8285")]
 z_index = 1
 use_parent_material = true
-position = Vector2(-289, 78)
+position = Vector2(-383, 78)
 
 [node name="cam" type="Camera2D" parent="."]
 position = Vector2(-208, 470)
@@ -376,6 +376,13 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cafeInteriorArea"]
 position = Vector2(-207, 461)
 shape = SubResource("RectangleShape2D_dvl46")
+
+[node name="cafeGarden" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cafeGarden"]
+position = Vector2(-708.5, 470.5)
+shape = SubResource("RectangleShape2D_wdmc2")
 
 [node name="teleportAnim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -416,12 +423,6 @@ libraries = {
 position = Vector2(-242.5, 514.5)
 shape = SubResource("RectangleShape2D_pmfxa")
 
-[node name="cafeGarden" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="cafeGarden"]
-position = Vector2(-688, 470.5)
-shape = SubResource("RectangleShape2D_wdmc2")
-
 [node name="CafeDesignHud" parent="." instance=ExtResource("13_fjxvu")]
 visible = false
 
@@ -449,9 +450,9 @@ autoplay = "fade"
 [connection signal="body_exited" from="windowArea" to="." method="_on_window_area_body_exited"]
 [connection signal="body_entered" from="cafeInteriorArea" to="." method="_on_cafe_interior_area_body_entered"]
 [connection signal="body_exited" from="cafeInteriorArea" to="." method="_on_cafe_interior_area_body_exited"]
+[connection signal="body_entered" from="cafeGarden" to="." method="_on_cafe_garden_body_entered"]
 [connection signal="body_entered" from="teleportToCafeInterior" to="." method="_on_teleport_to_cafe_interior_body_entered"]
 [connection signal="body_entered" from="teleportToHouseDoor" to="." method="_on_teleport_to_house_door_body_entered"]
 [connection signal="timeout" from="tpTimer" to="." method="_on_tp_timer_timeout"]
 [connection signal="body_entered" from="bookArea" to="." method="_on_book_area_body_entered"]
 [connection signal="body_exited" from="bookArea" to="." method="_on_book_area_body_exited"]
-[connection signal="body_entered" from="cafeGarden" to="." method="_on_cafe_garden_body_entered"]

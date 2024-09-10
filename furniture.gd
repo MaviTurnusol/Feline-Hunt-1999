@@ -2,6 +2,7 @@ extends Node2D
 
 class_name furniture
 
+var spawnPlaced = false
 var isPlaced = false
 var isColliding = false
 var collidingArray = []
@@ -13,7 +14,8 @@ var puttable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	position = get_global_mouse_position()
+	if !spawnPlaced:
+		position = get_global_mouse_position()
 	$area/CollisionShape2D.shape.size = size
 	pass # Replace with function body.
 
@@ -38,8 +40,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("left click"):
 		if !isPlaced && collidingArray.is_empty() && puttable:
 			isPlaced = true
+			var pos : Vector2 = global_position
+			UnlimitedRulebook.furniturePositionDictionary[displayName] = [displayName, pos]
 			UnlimitedRulebook.furnitureValues += value
 			UnlimitedRulebook.isHandFull = false
+			UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
 	pass
 
 
@@ -59,16 +64,19 @@ func _on_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("left click"):
 			if isPlaced && !UnlimitedRulebook.isHandFull:
+				spawnPlaced = false
 				isPlaced = false
 				puttable = false
 				$pullTimer.start()
 				UnlimitedRulebook.isHandFull = true
+				UnlimitedRulebook.furniturePositionDictionary.erase(displayName)
 				UnlimitedRulebook.furnitureValues -= value
 		if Input.is_action_just_pressed("right click"):
 			if isPlaced && !UnlimitedRulebook.isHandFull:
 				modulate = Color(1, 0.7, 0.7, 0.667)
 				UnlimitedRulebook.furnitureValues -= value
 				UnlimitedRulebook.furnitureInventory.append(displayName)
+				UnlimitedRulebook.furniturePositionDictionary.erase(displayName)
 				UnlimitedRulebook.cafeHud.refresh_items()
 				queue_free()
 	pass # Replace with function body.

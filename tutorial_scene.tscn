@@ -1,0 +1,316 @@
+[gd_scene load_steps=38 format=3 uid="uid://b1fipq55s84wj"]
+
+[ext_resource type="Script" path="res://tutorial_scene.gd" id="1_206tp"]
+[ext_resource type="Texture2D" uid="uid://dq4r1xlfi23db" path="res://Sprites/tutorialStreet.png" id="1_810uc"]
+[ext_resource type="Texture2D" uid="uid://djsop2yegggka" path="res://Sprites/trashCant.png" id="2_51vps"]
+[ext_resource type="Script" path="res://action_camera.gd" id="2_88njp"]
+[ext_resource type="PackedScene" uid="uid://cj5vbbkglty0n" path="res://hiding_area.tscn" id="4_w3ovj"]
+[ext_resource type="Texture2D" uid="uid://b3lrthcc0r24k" path="res://Sprites/trashCan.png" id="5_1sjwx"]
+[ext_resource type="Texture2D" uid="uid://bogmhkedrr5t" path="res://Sprites/andsign.png" id="6_aowy1"]
+[ext_resource type="Texture2D" uid="uid://ckxi46jbjq3lj" path="res://Sprites/slightlyLongerRedSign.png" id="7_gphx6"]
+[ext_resource type="Texture2D" uid="uid://766sy2hkvs12" path="res://Sprites/catsign.png" id="8_30qm7"]
+[ext_resource type="Texture2D" uid="uid://cw62dy3h4uhgh" path="res://Sprites/wapanesesign.png" id="9_0bnco"]
+[ext_resource type="Texture2D" uid="uid://bv6bqsrf2xd1m" path="res://Sprites/tutorialendsign.png" id="10_u2cws"]
+[ext_resource type="Texture2D" uid="uid://cqweeaoy3kqeu" path="res://Sprites/fleshbot.png" id="11_hd6ca"]
+[ext_resource type="PackedScene" uid="uid://dtjuft6wc0pjd" path="res://climbable_surface.tscn" id="12_q5fbd"]
+[ext_resource type="PackedScene" uid="uid://cnb4cdopmbu3b" path="res://character_action.tscn" id="13_o04lw"]
+[ext_resource type="Shader" path="res://fogtest.gdshader" id="14_n2tbq"]
+[ext_resource type="PackedScene" uid="uid://b3tw2y42jlg88" path="res://gato.tscn" id="15_om64j"]
+[ext_resource type="Shader" path="res://bordertest.gdshader" id="17_upvus"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3r4iw"]
+size = Vector2(1607, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg8jh"]
+size = Vector2(33, 257)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jj34"]
+size = Vector2(34, 257)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2oaa"]
+size = Vector2(54, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrwi5"]
+size = Vector2(459, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0b0oj"]
+size = Vector2(189, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwi45"]
+size = Vector2(100, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m7oe"]
+size = Vector2(37, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8glm"]
+size = Vector2(18, 29.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l706c"]
+size = Vector2(16, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swi5a"]
+size = Vector2(8, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8psom"]
+size = Vector2(459, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqccn"]
+size = Vector2(189, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pap4c"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_udp0x"]
+width = 480
+height = 270
+seamless = true
+noise = SubResource("FastNoiseLite_pap4c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysrvp"]
+shader = ExtResource("14_n2tbq")
+shader_parameter/density = 0.125
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_udp0x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05yao"]
+shader = ExtResource("17_upvus")
+
+[sub_resource type="Animation" id="Animation_l5y0p"]
+resource_name = "fade"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/bigBlackRect:color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ddw45"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer2/bigBlackRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ge11e"]
+_data = {
+"RESET": SubResource("Animation_ddw45"),
+"fade": SubResource("Animation_l5y0p")
+}
+
+[node name="tutorialScene" type="Node2D"]
+script = ExtResource("1_206tp")
+
+[node name="background" type="Sprite2D" parent="."]
+texture = ExtResource("1_810uc")
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(731.5, 267)
+shape = SubResource("RectangleShape2D_3r4iw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-55.5, 128.5)
+shape = SubResource("RectangleShape2D_kg8jh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1497, 128.5)
+shape = SubResource("RectangleShape2D_6jj34")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(190, 99.5)
+shape = SubResource("RectangleShape2D_a2oaa")
+one_way_collision = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(404, 99.5)
+shape = SubResource("RectangleShape2D_a2oaa")
+one_way_collision = true
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(598, 84)
+shape = SubResource("RectangleShape2D_a2oaa")
+one_way_collision = true
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(778, 99.5)
+shape = SubResource("RectangleShape2D_a2oaa")
+one_way_collision = true
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(964, 99.5)
+shape = SubResource("RectangleShape2D_a2oaa")
+one_way_collision = true
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1373, 99.5)
+shape = SubResource("RectangleShape2D_a2oaa")
+one_way_collision = true
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(593.5, 195.5)
+shape = SubResource("RectangleShape2D_yrwi5")
+one_way_collision = true
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(941.5, 195.5)
+shape = SubResource("RectangleShape2D_0b0oj")
+one_way_collision = true
+
+[node name="camera" type="Camera2D" parent="."]
+position = Vector2(-48, 135)
+limit_left = 0
+limit_right = 1449
+script = ExtResource("2_88njp")
+
+[node name="hidingArea" parent="." instance=ExtResource("4_w3ovj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(970, 167)
+shape = SubResource("RectangleShape2D_bwi45")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(201.5, 244.5)
+shape = SubResource("RectangleShape2D_2m7oe")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(401, 242.75)
+shape = SubResource("RectangleShape2D_w8glm")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(982, 243)
+shape = SubResource("RectangleShape2D_l706c")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="hidingArea"]
+position = Vector2(1061, 233)
+shape = SubResource("RectangleShape2D_swi5a")
+
+[node name="characterAction" parent="." instance=ExtResource("13_o04lw")]
+position = Vector2(23, 233)
+
+[node name="TrashCan" type="Sprite2D" parent="."]
+position = Vector2(202, 225)
+texture = ExtResource("5_1sjwx")
+centered = false
+
+[node name="TrashCant" type="Sprite2D" parent="."]
+position = Vector2(178, 226)
+texture = ExtResource("2_51vps")
+centered = false
+
+[node name="TrashCant2" type="Sprite2D" parent="."]
+position = Vector2(970, 226)
+texture = ExtResource("2_51vps")
+centered = false
+
+[node name="TrashCant3" type="Sprite2D" parent="."]
+position = Vector2(389, 226)
+texture = ExtResource("2_51vps")
+centered = false
+
+[node name="Andsign" type="Sprite2D" parent="."]
+position = Vector2(153, 139)
+texture = ExtResource("6_aowy1")
+centered = false
+
+[node name="SlightlyLongerRedSign" type="Sprite2D" parent="."]
+position = Vector2(450, 37)
+texture = ExtResource("7_gphx6")
+centered = false
+
+[node name="Catsign" type="Sprite2D" parent="."]
+position = Vector2(858, 56)
+texture = ExtResource("8_30qm7")
+centered = false
+
+[node name="Wapanesesign" type="Sprite2D" parent="."]
+position = Vector2(909, 136)
+texture = ExtResource("9_0bnco")
+centered = false
+
+[node name="Tutorialendsign" type="Sprite2D" parent="."]
+position = Vector2(1295, 148)
+texture = ExtResource("10_u2cws")
+centered = false
+
+[node name="Fleshbot" type="Sprite2D" parent="."]
+position = Vector2(1046, 209)
+texture = ExtResource("11_hd6ca")
+centered = false
+
+[node name="climbableSurface" parent="." instance=ExtResource("12_q5fbd")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(593.5, 195.5)
+shape = SubResource("RectangleShape2D_8psom")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="climbableSurface"]
+position = Vector2(941.5, 195.5)
+shape = SubResource("RectangleShape2D_hqccn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.9, 1)
+repeat_size = Vector2(480, 0)
+repeat_times = 6
+
+[node name="ColorRect" type="ColorRect" parent="Parallax2D"]
+material = SubResource("ShaderMaterial_ysrvp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_right = 480.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Gato" parent="." instance=ExtResource("15_om64j")]
+position = Vector2(1260, 257)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_05yao")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -20.0
+offset_right = 22.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bigBlackRect" type="ColorRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="halfFader" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ge11e")
+}
+
+[connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]

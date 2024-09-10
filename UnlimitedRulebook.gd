@@ -19,9 +19,11 @@ var mental = 3 : set = set_mental
 var money = 20
 var health = 100
 var furnitureValues = 0
-var furnitureInventory = ["bar chair", "bar chair", "bar chair", "bar chair", "bar chair"]
+var furnitureInventory = []
 var foodInventory = ["Cosmic Bread", "Uranium Bread"]
-var catCount = 0
+var furniturePositionDictionary = {}
+var catCount = 1
+var tutorialDone = false
 
 #activity/time
 var acti1 = "Rest"
@@ -35,12 +37,15 @@ var currDay = 0
 #is constant
 var huntDuration = 120
 var deltaHuntConstant = 0
+var enteringFromGarden = false
+var cafeIncome
 
 var bpm := 100.0
 
 #global events -> not constant
 var isHandFull = false
 var cafeMode = false
+var catsGained = 0
 
 const SAVE_PATH_1 = "user://save1.json"
 const SAVE_PATH_2 = "user://save2.json"
@@ -77,7 +82,9 @@ func save_game(selSave):
 		"foodInventory" = foodInventory,
 		"catCount" = catCount,
 		"currActi" = currActi,
-		"currDay" = currDay
+		"currDay" = currDay,
+		"furniturePositionDictionary" = furniturePositionDictionary,
+		"tutorialDone" = tutorialDone
 	}
 
 	file.store_line(JSON.stringify(save_dict))
@@ -100,19 +107,24 @@ func load_game(selSave):
 	catCount = save_dict["catCount"]
 	currActi = save_dict["currActi"]
 	currDay = save_dict["currDay"]
-	
-	get_tree().change_scene_to_file("res://apartment_scene_main.tscn")
+	furniturePositionDictionary = save_dict["furniturePositionDictionary"]
+	tutorialDone = save_dict["tutorialDone"]
+	if tutorialDone:
+		get_tree().change_scene_to_file("res://apartment_scene_main.tscn")
+	else:
+		get_tree().change_scene_to_file("res://tutorial_scene.tscn")
 
 func _ready():
+	furnitureInventory.append("bar chair")
 	foodDb = {
-		"Bread": ["Bread", +1, 0, "res://Sprites/bread.png"],
-		"Anti Bread": ["Anti Bread", -1, 0, "res://Sprites/antibread.png"],
-		"Rare Bread": ["Rare Bread", +2, 0, "res://Sprites/rarebread.png"],
-		"Epic Bread": ["Epic Bread", +3, 0, "res://Sprites/epicbread.png"],
-		"Legendary Bread": ["Legendary Bread", +4, 0, "res://Sprites/legendarybread.png"],
-		"Cosmic Bread": ["Cosmic Bread", +5, 0, "res://Sprites/cosmicbread.png"],
-		"Flipped Bread": ["Flipped Bread", 0, +1, "res://Sprites/flippedbread.png"],
-		"Uranium Bread": ["Uranium Bread", -5, 0, "res://Sprites/uraniumbread.png"]
+		"Bread": ["Bread", +1, 0, "res://Sprites/bread.png", 5],
+		"Anti Bread": ["Anti Bread", -1, 0, "res://Sprites/antibread.png", -5],
+		"Rare Bread": ["Rare Bread", +2, 0, "res://Sprites/rarebread.png", 10],
+		"Epic Bread": ["Epic Bread", +3, 0, "res://Sprites/epicbread.png", 20],
+		"Legendary Bread": ["Legendary Bread", +4, 0, "res://Sprites/legendarybread.png", 50],
+		"Cosmic Bread": ["Cosmic Bread", +5, 0, "res://Sprites/cosmicbread.png", 35],
+		"Flipped Bread": ["Flipped Bread", 0, +1, "res://Sprites/flippedbread.png", 5],
+		"Uranium Bread": ["Uranium Bread", -5, 0, "res://Sprites/uraniumbread.png", 5]
 	}
 	pass # Replace with function body.
 
@@ -134,6 +146,8 @@ func _process(delta):
 			if huntStarted && actirray[element] != "Hunt":
 				return
 	pass
+	
+	cafeIncome = round(catCount*furnitureValues*mental*0.1*randf_range(0.5, 2))
 
 func _do_next_activity():
 	if currActi < 4:
@@ -143,10 +157,18 @@ func _do_next_activity():
 					physical -= 1
 					get_tree().change_scene_to_file("res://street_scene_main.tscn")
 				"Rest":
-					pass
+					Transition.endedScene = "Rest"
+					currActi+=1
+					save_game(currSave)
+					get_tree().change_scene_to_file("res://transition_scene.tscn")
 				"Open Cafe":
-					pass
+					Transition.endedScene = "Open Cafe"
+					currActi+=1
+					money += cafeIncome
+					save_game(currSave)
+					get_tree().change_scene_to_file("res://transition_scene.tscn")
 				"Shop":
-					pass
+					save_game(currSave)
+					get_tree().change_scene_to_file("res://shop_scene.tscn")
 	else:
 		get_tree().change_scene_to_file("res://eating_scene.tscn")

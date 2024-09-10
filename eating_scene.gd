@@ -24,11 +24,13 @@ func _on_eat_pressed():
 	if selectedBread != null:
 		UnlimitedRulebook.physical += UnlimitedRulebook.foodDb[selectedBread][1]
 		UnlimitedRulebook.mental += UnlimitedRulebook.foodDb[selectedBread][2]
-	UnlimitedRulebook.currDay += 1
-	UnlimitedRulebook.currActi = 0
-	UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
-	gonnaChange = true
-	$halfFader.play_backwards("opening")
+		UnlimitedRulebook.foodInventory.erase(selectedBread)
+		load_items()
+		UnlimitedRulebook.currDay += 1
+		UnlimitedRulebook.currActi = 0
+		UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
+		gonnaChange = true
+		$halfFader.play_backwards("opening")
 	pass # Replace with function body.
 
 
@@ -41,3 +43,11 @@ func _on_half_fader_animation_finished(anim_name):
 	if gonnaChange:
 		UnlimitedRulebook.load_game(UnlimitedRulebook.currSave)
 	pass # Replace with function body.
+
+
+func _on_pass_pressed():
+		UnlimitedRulebook.currDay += 1
+		UnlimitedRulebook.currActi = 0
+		UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
+		gonnaChange = true
+		$halfFader.play_backwards("opening")

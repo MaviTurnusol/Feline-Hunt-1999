@@ -1,0 +1,34 @@
+~ Hunt
+if UnlimitedRulebook.catsGained < 5:
+	With only {{UnlimitedRulebook.catsGained}} cats, she returned with disappointment
+	Mental decreased
+	set UnlimitedRulebook.mental = UnlimitedRulebook.mental - 1
+	set UnlimitedRulebook.catsGained = 0
+else:
+	With {{UnlimitedRulebook.catsGained}} cats in her arms, she returned victorious
+	Mental increased
+	set UnlimitedRulebook.mental = UnlimitedRulebook.mental + 1
+	set UnlimitedRulebook.catsGained = 0
+do Transition.enter_from_garden()
+
+~ OpenCafe
+Business... {{UnlimitedRulebook.cafeIncome}}$ gained
+Dealing with custemors is hard, mental decreased
+set UnlimitedRulebook.mental = UnlimitedRulebook.mental - 1
+set UnlimitedRulebook.physical = UnlimitedRulebook.physical + 1
+do Transition.enter_from_garden()
+
+~ Resting
+Lying in a sofa is fun
+Mental increased
+Physical health increased
+set UnlimitedRulebook.mental = UnlimitedRulebook.mental + 1
+set UnlimitedRulebook.physical = UnlimitedRulebook.physical + 1
+do Transition.enter_from_garden()
+
+~ Tutorial
+That was... Surely a weird dream
+Which reminds me, the stray cats are completely free
+Maybe I can turn a fortune if I open a cat cafe
+set UnlimitedRulebook.tutorialDone = true
+do Transition.enter_from_kitchen()

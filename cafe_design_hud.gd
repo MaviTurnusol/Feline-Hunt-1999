@@ -6,11 +6,7 @@ var isPulled = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	UnlimitedRulebook.cafeHud = self
-	for element in UnlimitedRulebook.furnitureInventory:
-		var itemFrame = load("res://item_frame.tscn").instantiate()
-		itemFrame.item = Furnituredb.furnitureDictionary[element]
-		$ScrollMenu/InventoryList.add_child(itemFrame)
-		itemAmount += 1
+	refresh_items()
 	pass # Replace with function body.
 
 

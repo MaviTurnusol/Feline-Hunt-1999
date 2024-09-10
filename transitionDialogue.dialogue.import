@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://csy34jqyxphtt"
+path="res://.godot/imported/transitionDialogue.dialogue-70ae48dfbd28730e2da83d9ab146f512.tres"
+
+[deps]
+
+source_file="res://transitionDialogue.dialogue"
+dest_files=["res://.godot/imported/transitionDialogue.dialogue-70ae48dfbd28730e2da83d9ab146f512.tres"]
+
+[params]
+
+defaults=true

@@ -2,13 +2,14 @@ extends CharacterBody2D
 
 var speed = 100.0
 var prevState
-var state = "walking" : set = set_state
+var state = "standing" : set = set_state
 var randStatesArray = ["standing", "checking", "walking", "tired"]
 var direction = -1
 @onready var anima = $anima
 var anim_state = "standing" : set = set_anim
 @export var grabValue = 0 : set = set_grabval
 @export var tweenVelox = 0
+var tutorial = false
 var grabToggled = false
 var isBeingGrabbed = false
 
@@ -19,6 +20,9 @@ func set_grabval(value):
 		grabValue = 100
 		if state != "tossed":
 			state = "tossed"
+			if !tutorial:
+				UnlimitedRulebook.catCount += 1
+				UnlimitedRulebook.catsGained += 1
 		return
 	else:
 		grabValue = value
@@ -64,8 +68,15 @@ func set_state(value):
 	state = value
 
 func _ready():
-	state = randStatesArray.pick_random()
-	stateTimer.wait_time = randf_range(2, 8)
+	if get_parent() !=  null:
+		if get_parent().tutu == true:
+			tutorial = true
+	if !tutorial:
+		state = randStatesArray.pick_random()
+		stateTimer.wait_time = randf_range(2, 8)
+	else:
+		state = "standing"
+		stateTimer.stop()
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -75,7 +86,8 @@ func _physics_process(delta):
 		"standing":
 			anim_state = "standing"
 			velocity.x = 0
-			if(stateTimer.is_stopped()): stateTimer.start()
+			if !tutorial:
+				if(stateTimer.is_stopped()): stateTimer.start()
 		"walking":
 			speed = 50.0
 			anima.scale.x = -direction
@@ -164,19 +176,22 @@ func _on_state_timer_timeout():
 
 
 func _on_sight_area_large_body_entered(body):
-	if body.is_in_group("AcPlayer"):
-		if(!body.isHidden && !body.isStalking):
-			if state != "running" && state != "startled" && state != "sleeping":
-				state = "startled"
-				stateTimer.stop()
+	if !tutorial:
+		if body.is_in_group("AcPlayer"):
+			if(!body.isHidden && !body.isStalking):
+				if state != "running" && state != "startled" && state != "sleeping":
+					print(tutorial)
+					state = "startled"
+					stateTimer.stop()
 
 
 func _on_sight_area_small_body_entered(body):
-	if body.is_in_group("AcPlayer"):
-		if(!body.isHidden):
-			if state != "running" && state != "startled":
-				state = "startled"
-				stateTimer.stop()
+	if !tutorial:
+		if body.is_in_group("AcPlayer"):
+			if(!body.isHidden):
+				if state != "running" && state != "startled":
+					state = "startled"
+					stateTimer.stop()
 
 
 func _on_move_down_timer_timeout():
