@@ -8,6 +8,7 @@ var selectedFurniture
 var furnitureIndex
 var cost = 0
 var gonnaChange = false
+var gunSelected = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomBreadArray.clear()
@@ -18,6 +19,8 @@ func _ready():
 	for i in 7:
 		randomFurnitureArray.append(Furnituredb.furnitureDictionary.keys()[randi() % Furnituredb.furnitureDictionary.size()])
 		$furniturePanel/furnitureList.add_item(randomFurnitureArray[i],  load(Furnituredb.furnitureDictionary[randomFurnitureArray[i]][0]))
+	if UnlimitedRulebook.currDay >= 5 && !UnlimitedRulebook.hasSharkKiller:
+		$breadPanel/breadList.add_item("Shark Killer", load("res://Sprites/sharkKiller.png"))
 	pass # Replace with function body.
 
 
@@ -35,9 +38,14 @@ func _process(delta):
 
 func _on_bread_list_item_selected(index):
 	selectedFurniture = null
-	selectedBread = $breadPanel/breadList.get_item_text(index)
-	breadIndex = index
-	cost = UnlimitedRulebook.foodDb[selectedBread][4]
+	gunSelected = false
+	if ($breadPanel/breadList.get_item_text(index) != "Shark Killer"):
+		selectedBread = $breadPanel/breadList.get_item_text(index)
+		breadIndex = index
+		cost = UnlimitedRulebook.foodDb[selectedBread][4]
+	else:
+		cost = 1000
+		gunSelected = true
 	pass # Replace with function body.
 
 func _on_buy_pressed():
@@ -56,6 +64,10 @@ func _on_buy_pressed():
 			$furniturePanel/furnitureList.remove_item(furnitureIndex)
 			selectedFurniture = null
 			cost = 0
+			UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
+		if gunSelected:
+			UnlimitedRulebook.hasSharkKiller = true
+			gunSelected = false
 			UnlimitedRulebook.save_game(UnlimitedRulebook.currSave)
 	pass # Replace with function body.
 
@@ -76,6 +88,7 @@ func _on_half_fader_animation_finished(anim_name):
 
 func _on_furniture_list_item_selected(index):
 	selectedBread = null
+	gunSelected = false
 	selectedFurniture = $furniturePanel/furnitureList.get_item_text(index)
 	furnitureIndex = index
 	cost = Furnituredb.furnitureDictionary[selectedFurniture][4]

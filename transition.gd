@@ -19,3 +19,12 @@ func enter_from_garden():
 
 func enter_from_kitchen():
 	get_tree().change_scene_to_file("res://apartment_scene_main.tscn")
+
+func goToStreet():
+	get_tree().change_scene_to_file("res://street_scene_main.tscn")
+	
+func goToSleep():
+	get_tree().change_scene_to_file("res://dream_chase_scene.tscn")
+
+func goToMonologueScene():
+	get_tree().change_scene_to_file("res://transition_scene.tscn")

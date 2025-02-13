@@ -21,10 +21,11 @@ var money = 20
 var health = 100
 var furnitureValues = 0
 var furnitureInventory = []
-var foodInventory = ["Cosmic Bread", "Uranium Bread"]
+var foodInventory = ["Bread"]
 var furniturePositionDictionary = {}
 var catCount = 1
 var tutorialDone = false
+var hasSharkKiller = false
 
 #activity/time
 var acti1 = "Rest"
@@ -96,7 +97,8 @@ func save_game(selSave):
 		"currActi" = currActi,
 		"currDay" = currDay,
 		"furniturePositionDictionary" = furniturePositionDictionary,
-		"tutorialDone" = tutorialDone
+		"tutorialDone" = tutorialDone,
+		"hasSharkKiller" = hasSharkKiller
 	}
 
 	file.store_line(JSON.stringify(save_dict))
@@ -121,6 +123,7 @@ func load_game(selSave):
 	currDay = save_dict["currDay"]
 	furniturePositionDictionary = save_dict["furniturePositionDictionary"]
 	tutorialDone = save_dict["tutorialDone"]
+	hasSharkKiller = save_dict["hasSharkKiller"]
 	if tutorialDone:
 		get_tree().change_scene_to_file("res://apartment_scene_main.tscn")
 	else:
@@ -133,8 +136,8 @@ func _ready():
 		"Anti Bread": ["Anti Bread", -1, 0, "res://Sprites/antibread.png", -5],
 		"Rare Bread": ["Rare Bread", +2, 0, "res://Sprites/rarebread.png", 10],
 		"Epic Bread": ["Epic Bread", +3, 0, "res://Sprites/epicbread.png", 20],
-		"Legendary Bread": ["Legendary Bread", +4, 0, "res://Sprites/legendarybread.png", 50],
-		"Cosmic Bread": ["Cosmic Bread", +5, 0, "res://Sprites/cosmicbread.png", 35],
+		"Legendary Bread": ["Legendary Bread", +4, 0, "res://Sprites/legendarybread.png", 35],
+		"Cosmic Bread": ["Cosmic Bread", +5, 0, "res://Sprites/cosmicbread.png", 50],
 		"Flipped Bread": ["Flipped Bread", 0, +1, "res://Sprites/flippedbread.png", 5],
 		"Uranium Bread": ["Uranium Bread", -5, 0, "res://Sprites/uraniumbread.png", 5]
 	}
@@ -165,12 +168,13 @@ func _do_next_activity():
 		if !actirray.has("empty"):
 			match actirray[currActi]:
 				"Hunt":
-					get_tree().change_scene_to_file("res://street_scene_main.tscn")
+					Transition.endedScene = "EnterHunt"
+					get_tree().change_scene_to_file("res://transition_scene.tscn")
 				"Rest":
-					Transition.endedScene = "Rest"
+					Transition.endedScene = "EnterRest"
 					currActi+=1
 					save_game(currSave)
-					get_tree().change_scene_to_file("res://dream_chase_scene.tscn")
+					get_tree().change_scene_to_file("res://transition_scene.tscn")
 				"Open Cafe":
 					Transition.endedScene = "Open Cafe"
 					currActi+=1

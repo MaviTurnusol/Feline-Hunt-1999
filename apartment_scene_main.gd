@@ -6,6 +6,7 @@ var camFollowPlayer = false
 var destination := Vector2.ZERO
 var duration = 1
 var direction = -1
+var gonnaChange = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	MusicBook.changeMusicTo(MusicBook.apartment)
@@ -18,6 +19,8 @@ func _ready():
 		if UnlimitedRulebook.furniturePositionDictionary[item][1] is String:
 			UnlimitedRulebook.furniturePositionDictionary[item][1] = string_to_vector2(UnlimitedRulebook.furniturePositionDictionary[item][1])
 		Furnituredb.spawn_furniture_placed(UnlimitedRulebook.furniturePositionDictionary[item][0], UnlimitedRulebook.furniturePositionDictionary[item][1], UnlimitedRulebook.furniturePositionDictionary[item][2], UnlimitedRulebook.furniturePositionDictionary[item][3])
+	if UnlimitedRulebook.currDay == 5 && !StoryBook.sharkSceneSeen:
+		get_tree().change_scene_to_file("res://shark_scene.tscn")
 	pass # Replace with function body.
 
 static func string_to_vector2(string := "") -> Vector2:
@@ -44,6 +47,17 @@ func _process(delta):
 		$gatoSleep.visible = true
 	if UnlimitedRulebook.catCount >= 30:
 		$gatoThree.visible = true
+	
+	if UnlimitedRulebook.currActi == 0:
+		$fadeLayer/daylight.visible = true
+	else:
+		$fadeLayer/daylight.visible = false
+	
+	if UnlimitedRulebook.currActi == 4:
+		$fadeLayer/night.visible = true
+	else:
+		$fadeLayer/night.visible = false
+	
 
 func _on_kitchen_area_body_entered(body):
 	if body.is_in_group("noAcPlayer"):
@@ -130,4 +144,11 @@ func _on_cafe_garden_body_entered(body):
 		if !UnlimitedRulebook.cafeMode:
 			UnlimitedRulebook.cafeMode = true
 			$CafeDesignHud.visible = true
+	pass # Replace with function body.
+
+
+func _on_half_fader_animation_finished(anim_name):
+	if gonnaChange:
+		gonnaChange = false
+		UnlimitedRulebook._do_next_activity()
 	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://t41eq0yiueh3"]
+[gd_scene load_steps=86 format=3 uid="uid://t41eq0yiueh3"]
 
 [ext_resource type="Texture2D" uid="uid://b5k2qgih6jt08" path="res://Sprites/parallaxLayer2.png" id="1_6mbmp"]
 [ext_resource type="Texture2D" uid="uid://cavckkhgktaq5" path="res://Sprites/backOfTheGround.png" id="1_7x8kw"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://f8nh4vg5vuk1" path="res://planning_book.tscn" id="11_qbtja"]
 [ext_resource type="PackedScene" uid="uid://bpn3pg2ngwhhm" path="res://cafe_design_hud.tscn" id="13_fjxvu"]
 [ext_resource type="Texture2D" uid="uid://ceetscnm00wwo" path="res://Sprites/blackCatTailDance-Sheet.png" id="14_iylbm"]
+[ext_resource type="Texture2D" uid="uid://dmu6vmvjefdku" path="res://light.png" id="14_vyitm"]
 [ext_resource type="Texture2D" uid="uid://b75rpwd0uo37t" path="res://Sprites/blackCatSleeping-Sheet.png" id="15_xrhjt"]
 [ext_resource type="Texture2D" uid="uid://dmi4ykl8vm4qi" path="res://Sprites/blackCatChecking-Sheet.png" id="16_epm51"]
 
@@ -755,6 +756,33 @@ offset_bottom = 270.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="daylight" type="ColorRect" parent="fadeLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.9655, 0.77, 0.0862745)
+
+[node name="PointLight2D" type="PointLight2D" parent="fadeLayer/daylight"]
+visible = false
+position = Vector2(238, 140)
+scale = Vector2(1.63086, 1)
+energy = 0.2
+texture = ExtResource("14_vyitm")
+
+[node name="night" type="ColorRect" parent="fadeLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.15426, 0.1206, 0.18, 0.372549)
+
 [node name="teleportToBedroomArea" type="Area2D" parent="."]
 
 [node name="halfFader" type="AnimationPlayer" parent="."]
@@ -799,3 +827,4 @@ flip_h = true
 [connection signal="timeout" from="tpTimer" to="." method="_on_tp_timer_timeout"]
 [connection signal="body_entered" from="bookArea" to="." method="_on_book_area_body_entered"]
 [connection signal="body_exited" from="bookArea" to="." method="_on_book_area_body_exited"]
+[connection signal="animation_finished" from="halfFader" to="." method="_on_half_fader_animation_finished"]

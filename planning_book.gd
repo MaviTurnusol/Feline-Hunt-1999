@@ -28,12 +28,13 @@ func _process(delta):
 			match UnlimitedRulebook.actirray[UnlimitedRulebook.currActi]:
 				"Hunt":
 					$rightPage/startDay.text = "Begin Hunt"
+					Transition.endedScene = "EnterHunt"
 				"Rest":
 					$rightPage/startDay.text = "Rest"
 				"Open Cafe":
 					$rightPage/startDay.text = "Open Cafe"
 				"Shop":
-					$rightPage/startDay.text = "Begin Shopping"
+					$rightPage/startDay.text = "Go Shopping"
 	else:
 		$rightPage/startDay.text = "Feast"
 
@@ -44,5 +45,8 @@ func _process(delta):
 
 
 func _on_start_day_pressed():
-	UnlimitedRulebook._do_next_activity()
+	if UnlimitedRulebook.apartmentScene.get_node("halfFader") != null:
+		print(Transition.endedScene)
+		UnlimitedRulebook.apartmentScene.get_node("halfFader").play_backwards("fade")
+		UnlimitedRulebook.apartmentScene.gonnaChange = true
 	pass # Replace with function body.

@@ -18,11 +18,11 @@ func changeMusicTo(music):
 	for item in get_children():
 		if item != music:
 			var tween = get_tree().create_tween()
-			tween.tween_property(item, "volume_db", -80, 2)
+			tween.tween_property(item, "volume_db", -80, 6)
 			tween.tween_property(item, "playing", false, 0)
 	var tween = get_tree().create_tween()
 	tween.tween_property(music, "playing", true, 0)
-	tween.tween_property(music, "volume_db", -20, -2)
+	tween.tween_property(music, "volume_db", -20, 6)
 
 func closeMusic():
 	for item in get_children():

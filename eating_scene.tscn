@@ -120,19 +120,10 @@ autoplay = "opening"
 layout_mode = 0
 offset_left = 16.0
 offset_top = 212.0
-offset_right = 110.0
-offset_bottom = 247.0
-theme_override_fonts/font = ExtResource("2_qxu56")
-text = "Eat"
-
-[node name="info" type="Button" parent="."]
-layout_mode = 0
-offset_left = 114.0
-offset_top = 212.0
 offset_right = 208.0
 offset_bottom = 247.0
 theme_override_fonts/font = ExtResource("2_qxu56")
-text = "Info"
+text = "Eat"
 
 [node name="pass" type="Button" parent="."]
 layout_mode = 0

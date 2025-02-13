@@ -1,0 +1,9 @@
+~ shark1
+[Loan Shark]: Ohh~ Woa- Is this your little child, Miss Feline??
+[Loan Shark]: She's just as ugly and anxietic as you.
+[Loan Shark]: You like mommy, little miss? You would like to help her debts, right?
+set StoryBook.nom1 = true
+[Loan Shark]: OR ELSE I WILL NOM YOU LIKE THE SHARK AM I!!!
+set Transition.endedScene = "Sharked1"
+do Transition.goToMonologueScene()
+=> END
