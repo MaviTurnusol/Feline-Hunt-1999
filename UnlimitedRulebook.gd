@@ -17,21 +17,32 @@ var cam
 #stats -> not constant
 var physical = 3 : set = set_physical
 var mental = 3 : set = set_mental
-var money = 20
+var money = 20 : set = set_money
 var health = 100
 var furnitureValues = 0
 var furnitureInventory = []
-var foodInventory = ["Cosmic Bread", "Uranium Bread"]
+var foodInventory = ["Bread"]
 var furniturePositionDictionary = {}
 var catCount = 1
+
+#A LOT OF TUTORIAL STUFF
+var helicopter = false
+var spawnRate = 100
+var infiniteStamina = false
 var tutorialDone = false
+var firstHuntDone = false
+var jumpCatchConfigured = false
+var hasSharkKiller = false
+var easyCatch = false
+var planningBookGuide = false
+var buildMenuGuide = false
 
 #activity/time
-var acti1 = "Rest"
+var acti1 = "empty"
 var acti2 = "Rest"
-var acti3 = "Rest"
-var acti4 = "Rest"
-var actirray = ["Rest", "Rest", "Rest", "Rest"]
+var acti3 = "Open Cafe"
+var acti4 = "Shop"
+var actirray = ["empty", "Rest", "Open Cafe", "Shop"]
 #not constant
 var currActi = 0
 var currDay = 0
@@ -80,6 +91,11 @@ func set_mental(value):
 		mental = 0
 		return
 	mental = value
+func set_money(value):
+	if value != NAN:
+		money = value
+	else:
+		money = 0
 
 func save_game(selSave):
 	var file = FileAccess.open(selSave, FileAccess.WRITE)
@@ -96,7 +112,17 @@ func save_game(selSave):
 		"currActi" = currActi,
 		"currDay" = currDay,
 		"furniturePositionDictionary" = furniturePositionDictionary,
-		"tutorialDone" = tutorialDone
+		"tutorialDone" = tutorialDone,
+		"hasSharkKiller" = hasSharkKiller,
+		"easyCatch" = easyCatch,
+		"jumpCatchConfigured" = jumpCatchConfigured,
+		"firstHuntDone" = firstHuntDone,
+		"planningBookGuide" = planningBookGuide,
+		"buildMenuGuide" = buildMenuGuide,
+		"acti1" = acti1,
+		"acti2" = acti2,
+		"acti3" = acti3,
+		"acti4" = acti4
 	}
 
 	file.store_line(JSON.stringify(save_dict))
@@ -121,6 +147,16 @@ func load_game(selSave):
 	currDay = save_dict["currDay"]
 	furniturePositionDictionary = save_dict["furniturePositionDictionary"]
 	tutorialDone = save_dict["tutorialDone"]
+	hasSharkKiller = save_dict["hasSharkKiller"]
+	easyCatch = save_dict["easyCatch"]
+	jumpCatchConfigured = save_dict["jumpCatchConfigured"]
+	firstHuntDone = save_dict["firstHuntDone"]
+	planningBookGuide = save_dict["planningBookGuide"]
+	buildMenuGuide = save_dict["buildMenuGuide"]
+	acti1 = save_dict["acti1"]
+	acti2 = save_dict["acti2"]
+	acti3 = save_dict["acti3"]
+	acti4 = save_dict["acti4"]
 	if tutorialDone:
 		get_tree().change_scene_to_file("res://apartment_scene_main.tscn")
 	else:
@@ -133,8 +169,8 @@ func _ready():
 		"Anti Bread": ["Anti Bread", -1, 0, "res://Sprites/antibread.png", -5],
 		"Rare Bread": ["Rare Bread", +2, 0, "res://Sprites/rarebread.png", 10],
 		"Epic Bread": ["Epic Bread", +3, 0, "res://Sprites/epicbread.png", 20],
-		"Legendary Bread": ["Legendary Bread", +4, 0, "res://Sprites/legendarybread.png", 50],
-		"Cosmic Bread": ["Cosmic Bread", +5, 0, "res://Sprites/cosmicbread.png", 35],
+		"Legendary Bread": ["Legendary Bread", +4, 0, "res://Sprites/legendarybread.png", 35],
+		"Cosmic Bread": ["Cosmic Bread", +5, 0, "res://Sprites/cosmicbread.png", 50],
 		"Flipped Bread": ["Flipped Bread", 0, +1, "res://Sprites/flippedbread.png", 5],
 		"Uranium Bread": ["Uranium Bread", -5, 0, "res://Sprites/uraniumbread.png", 5]
 	}
@@ -165,16 +201,17 @@ func _do_next_activity():
 		if !actirray.has("empty"):
 			match actirray[currActi]:
 				"Hunt":
-					get_tree().change_scene_to_file("res://street_scene_main.tscn")
+					Transition.endedScene = "EnterHunt"
+					get_tree().change_scene_to_file("res://transition_scene.tscn")
 				"Rest":
-					Transition.endedScene = "Rest"
+					Transition.endedScene = "EnterRest"
 					currActi+=1
 					save_game(currSave)
-					get_tree().change_scene_to_file("res://dream_chase_scene.tscn")
+					get_tree().change_scene_to_file("res://transition_scene.tscn")
 				"Open Cafe":
 					Transition.endedScene = "Open Cafe"
 					currActi+=1
-					cafeIncome = round(catCount*mental*0.6*randf_range(0.5, 2) + sqrt(furnitureValues*randf_range(0.5, 2)*4))
+					cafeIncome = round(catCount*mental*0.6*randf_range(0.5, 2) + sqrt(abs(furnitureValues*randf_range(0.5, 2)*4)))
 					money += cafeIncome
 					save_game(currSave)
 					get_tree().change_scene_to_file("res://transition_scene.tscn")

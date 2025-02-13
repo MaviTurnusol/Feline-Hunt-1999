@@ -6,8 +6,12 @@ var camFollowPlayer = false
 var destination := Vector2.ZERO
 var duration = 1
 var direction = -1
+var gonnaChange = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if UnlimitedRulebook.firstHuntDone:
+		if !UnlimitedRulebook.jumpCatchConfigured:
+			$popUpJumpCatching.get_node("puller").play("pull")
 	MusicBook.changeMusicTo(MusicBook.apartment)
 	UnlimitedRulebook.apartmentScene = self
 	if UnlimitedRulebook.enteringFromGarden:
@@ -44,6 +48,17 @@ func _process(delta):
 		$gatoSleep.visible = true
 	if UnlimitedRulebook.catCount >= 30:
 		$gatoThree.visible = true
+	
+	if UnlimitedRulebook.currActi == 0:
+		$fadeLayer/daylight.visible = true
+	else:
+		$fadeLayer/daylight.visible = false
+	
+	if UnlimitedRulebook.currActi == 4:
+		$fadeLayer/night.visible = true
+	else:
+		$fadeLayer/night.visible = false
+	
 
 func _on_kitchen_area_body_entered(body):
 	if body.is_in_group("noAcPlayer"):
@@ -131,3 +146,18 @@ func _on_cafe_garden_body_entered(body):
 			UnlimitedRulebook.cafeMode = true
 			$CafeDesignHud.visible = true
 	pass # Replace with function body.
+
+
+func _on_half_fader_animation_finished(anim_name):
+	if gonnaChange:
+		gonnaChange = false
+		UnlimitedRulebook._do_next_activity()
+	pass # Replace with function body.
+
+
+func _on_tp_timeout():
+	if UnlimitedRulebook.currDay == 5 && !StoryBook.sharkSceneSeen:
+		get_tree().change_scene_to_file("res://shark_scene.tscn")
+		print("tsss")
+	if UnlimitedRulebook.currDay == 10:
+		get_tree().change_scene_to_file("res://shark_fight.tscn")

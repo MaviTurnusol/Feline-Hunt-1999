@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://f8nh4vg5vuk1"]
+[gd_scene load_steps=8 format=3 uid="uid://f8nh4vg5vuk1"]
 
 [ext_resource type="Script" path="res://planning_book.gd" id="1_87v7g"]
 [ext_resource type="Texture2D" uid="uid://ccmpcbohxdntn" path="res://Sprites/rulebook.png" id="1_quggg"]
 [ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="2_g6wim"]
 [ext_resource type="PackedScene" uid="uid://bb8s77rbjg0i2" path="res://activity.tscn" id="4_sd4w2"]
 [ext_resource type="Theme" uid="uid://2dip1rniy10o" path="res://activitytheme.tres" id="4_xo0eq"]
+[ext_resource type="Texture2D" uid="uid://bpwuheld5ucud" path="res://Sprites/redpoints.png" id="6_p566g"]
 
 [sub_resource type="Theme" id="Theme_k5tnr"]
 
@@ -30,7 +31,7 @@ theme = SubResource("Theme_k5tnr")
 texture = ExtResource("1_quggg")
 
 [node name="title" type="Label" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_left = 115.0
 offset_top = 36.0
 offset_right = 218.0
@@ -195,5 +196,16 @@ text = "20.00 - 00.00"
 
 [node name="Activity" parent="leftPage/sect4" instance=ExtResource("4_sd4w2")]
 layout_mode = 2
+
+[node name="guideArrows" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 77.0
+offset_right = 223.0
+offset_bottom = 107.0
+mouse_filter = 2
+texture = ExtResource("6_p566g")
+expand_mode = 1
+stretch_mode = 2
 
 [connection signal="pressed" from="rightPage/startDay" to="." method="_on_start_day_pressed"]

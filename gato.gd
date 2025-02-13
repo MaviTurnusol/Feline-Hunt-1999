@@ -20,6 +20,7 @@ func set_grabval(value):
 		grabValue = 100
 		if state != "tossed":
 			state = "tossed"
+			$CollisionShape2D.disabled = true
 			$boom.play()
 			UnlimitedRulebook.cam.add_trauma(0.5)
 			OS.delay_msec(30)
@@ -141,6 +142,9 @@ func _physics_process(delta):
 			if is_on_floor() && anima.frame == 2:
 				state = prevState
 		"tossed":
+			$CollisionShape2D.disabled = true
+			$sightMarker/sightAreaLarge/CollisionShape2D.disabled = true
+			$sightMarker/sightAreaSmall/CollisionShape2D.disabled = true
 			anim_state = "jumping"
 			if anima.frame == 2:
 				anima.pause()
@@ -207,6 +211,10 @@ func _on_grabbable_area_area_entered(area):
 	if area.is_in_group("cathingen"):
 		$outlineToggle.play("enable")
 		isBeingGrabbed = true
+		if UnlimitedRulebook.easyCatch && UnlimitedRulebook.actionPlayer.isCatching:
+			$CollisionShape2D.disabled = true
+			grabToggled = true
+			grabValue = 110
 	pass # Replace with function body.
 
 

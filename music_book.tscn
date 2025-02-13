@@ -1,34 +1,41 @@
 [gd_scene load_steps=6 format=3 uid="uid://dvf1fix1jeth4"]
 
 [ext_resource type="Script" path="res://music_book.gd" id="1_bsc4d"]
-[ext_resource type="AudioStream" uid="uid://ec38l6g3yl7w" path="res://Chikoi-the-Maid-unreleased-demo_s-_FcbVf9sFFlo_.mp3" id="1_f3mu2"]
-[ext_resource type="AudioStream" uid="uid://dtp4hkeiyyprt" path="res://Chikoi The Maid - Breather [vYZSnhSlzoA].mp3" id="1_mkpo6"]
-[ext_resource type="AudioStream" uid="uid://c81j5pvk2en7s" path="res://Chikoi-The-Maid-Nii-san-_dbHWRD9aGSk_.mp3" id="3_upoot"]
-[ext_resource type="AudioStream" uid="uid://c6d7gp6qqvgnn" path="res://Chikoi The Maid - Injector [Yb1lNnXzJsM].mp3" id="4_d0ipe"]
+[ext_resource type="AudioStream" uid="uid://cqfdf0f1wwbrc" path="res://Music/Test Subject, Never-Ending Maze, Guilt Abandoned Wöhler.mp3" id="2_6b2id"]
+[ext_resource type="AudioStream" uid="uid://dxj4pyekmgscg" path="res://Music/Escaping the Nightmareae.mp3" id="3_q4a1f"]
+[ext_resource type="AudioStream" uid="uid://nv6vwu70pl28" path="res://Music/Best Cafe in Town, Cat Cafe in Town.mp3" id="4_5go6e"]
+[ext_resource type="AudioStream" uid="uid://u8b1rawe4uo2" path="res://Music/Escaping the Nightmareae(1).mp3" id="5_fceyl"]
 
 [node name="MusicBook" type="Node"]
+process_mode = 3
 script = ExtResource("1_bsc4d")
 
 [node name="menu" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_f3mu2")
-volume_db = -20.0
+stream = ExtResource("2_6b2id")
+volume_db = -15.0
 autoplay = true
 parameters/looping = true
 
 [node name="tutorial" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_mkpo6")
+stream = ExtResource("3_q4a1f")
 volume_db = -20.0
 autoplay = true
 parameters/looping = true
 
 [node name="apartment" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_upoot")
-volume_db = -20.0
+stream = ExtResource("4_5go6e")
+volume_db = -15.0
 autoplay = true
 parameters/looping = true
 
 [node name="street" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_d0ipe")
+stream = ExtResource("5_fceyl")
 volume_db = -20.0
 autoplay = true
 parameters/looping = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

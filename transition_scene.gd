@@ -14,9 +14,15 @@ func _ready():
 			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Hospital")
 		"Nightmare":
 			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Nightmare")
+		"EnterHunt":
+			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "EnterHunt")
+		"EnterRest":
+			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "EnterRest")
+		"Sharked1":
+			DialogueManager.show_example_dialogue_balloon(load("res://transitionDialogue.dialogue"), "Sharked1")
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

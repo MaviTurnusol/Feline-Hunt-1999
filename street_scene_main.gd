@@ -11,6 +11,8 @@ func _ready():
 	$countdown.wait_time = UnlimitedRulebook.huntDuration
 	$countdown.start()
 	$halfFader.play_backwards("fade")
+	if(!UnlimitedRulebook.firstHuntDone):
+		UnlimitedRulebook.firstHuntDone = true
 	pass # Replace with function body.
 
 
@@ -35,6 +37,7 @@ func _on_countdown_timeout():
 func _on_half_fader_animation_finished(anim_name):
 	if gonnaSkip:
 		Transition.endedScene = "Hunt"
+		UnlimitedRulebook.physical = round(UnlimitedRulebook.health/20)
 		UnlimitedRulebook.currActi += UnlimitedRulebook.huntDuration/120
 		UnlimitedRulebook.deltaHuntConstant += 1
 		UnlimitedRulebook.catSpawnerArray.clear()

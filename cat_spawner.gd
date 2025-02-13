@@ -14,7 +14,7 @@ func spawn_cat():
 
 func _on_timer_timeout():
 	if global_position.distance_to(UnlimitedRulebook.actionPlayer.global_position) > 570 && global_position.distance_to(UnlimitedRulebook.actionPlayer.global_position) < 1200:
-		if randi_range(0, 100) < spawnChance:
+		if randi_range(0, UnlimitedRulebook.spawnRate) < spawnChance:
 			var cat = load("res://gato.tscn").instantiate()
 			cat.position = global_position
 			UnlimitedRulebook.streetScene.add_child(cat)

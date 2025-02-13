@@ -12,6 +12,8 @@ var texture
 var size := Vector2(17, 19)
 var puttable = true
 var nbtNumber
+var solid
+@onready var cast = $landCast
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !spawnPlaced:
@@ -29,10 +31,12 @@ func _ready():
 func _process(delta):
 	if texture != null:
 		$sprite.texture = load(texture)
-		
-	if $landCast.is_colliding():
-		if $landCast.get_collider().is_in_group("floor"):
-			position.y = $landCast.get_collision_point().y - size.y/2
+	
+	if cast != null:
+		cast.enabled = true
+		if cast.is_colliding():
+			if cast.get_collider().is_in_group("floor"):
+				position.y = cast.get_collision_point().y - size.y/2
 	
 	if !isPlaced:
 		position.x = get_global_mouse_position().x
@@ -47,6 +51,7 @@ func _process(delta):
 		
 	if Input.is_action_just_pressed("left click"):
 		if !isPlaced && collidingArray.is_empty() && puttable:
+			print(cast.get_collision_point().y - size.y/2)
 			$AudioStreamPlayer2D.play()
 			isPlaced = true
 			var pos : Vector2 = global_position
@@ -93,4 +98,8 @@ func _on_area_input_event(viewport, event, shape_idx):
 
 func _on_pull_timer_timeout():
 	puttable = true
+	pass # Replace with function body.
+
+
+func _on_timer_timeout():
 	pass # Replace with function body.

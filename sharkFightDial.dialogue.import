@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://crw7vdcp402cr"
+path="res://.godot/imported/sharkFightDial.dialogue-5047ed1e938de1c3bf3bc75bd8a2e799.tres"
+
+[deps]
+
+source_file="res://sharkFightDial.dialogue"
+dest_files=["res://.godot/imported/sharkFightDial.dialogue-5047ed1e938de1c3bf3bc75bd8a2e799.tres"]
+
+[params]
+
+defaults=true

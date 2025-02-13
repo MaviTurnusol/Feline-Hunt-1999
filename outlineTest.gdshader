@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform vec3 outline_color: source_color;
 uniform float progress: hint_range(0.0, 1.0);
-uniform float width: hint_range(0.0, 0.006, 0.001) = 0.001;
+uniform float width: hint_range(0.0, 0.064, 0.001) = 0.001;
 
 void fragment() {
 	vec4 line_neg_y = vec4(outline_color.rgb, texture(TEXTURE, vec2(UV.x, UV.y - width)).a);

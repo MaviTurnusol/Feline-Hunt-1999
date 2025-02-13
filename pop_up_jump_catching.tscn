@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=3 uid="uid://l5ruasqfo7an"]
+
+[ext_resource type="Script" path="res://pop_up_jump_catching.gd" id="1_hg23o"]
+[ext_resource type="Texture2D" uid="uid://lrfsgejeawqu" path="res://Sprites/pageJumpCatch.png" id="1_pkfmx"]
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="2_hacsx"]
+[ext_resource type="Theme" uid="uid://2dip1rniy10o" path="res://activitytheme.tres" id="3_nn24w"]
+
+[sub_resource type="Animation" id="Animation_rmeqy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -270)]
+}
+
+[sub_resource type="Animation" id="Animation_ee5f4"]
+resource_name = "pull"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -270), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0jph8"]
+_data = {
+"RESET": SubResource("Animation_rmeqy"),
+"pull": SubResource("Animation_ee5f4")
+}
+
+[node name="popUpJumpCatching" type="CanvasLayer"]
+script = ExtResource("1_hg23o")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -270.0
+offset_bottom = -270.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+mouse_filter = 2
+texture = ExtResource("1_pkfmx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 45.0
+offset_right = 436.0
+offset_bottom = 146.0
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="title" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.278431, 0.262745, 0.243137, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.172549)
+theme_override_fonts/font = ExtResource("2_hacsx")
+text = "Do You Want To Enable Jump-Catching?"
+horizontal_alignment = 1
+
+[node name="jcText" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46, 0.43424, 0.4048, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.0901961)
+theme_override_fonts/font = ExtResource("2_hacsx")
+text = "Catch cats automatically if you touch them in the run-jump state. This makes hunting much easier. You can later change this in the pause menu."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="enab" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 180.0
+offset_right = 163.0
+offset_bottom = 212.0
+theme = ExtResource("3_nn24w")
+theme_override_colors/font_color = Color(0.3, 0.2844, 0.264, 1)
+text = "Enable"
+
+[node name="disab" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 330.0
+offset_top = 180.0
+offset_right = 430.0
+offset_bottom = 212.0
+theme = ExtResource("3_nn24w")
+theme_override_colors/font_color = Color(0.301961, 0.286275, 0.262745, 1)
+text = "Disable
+"
+
+[node name="puller" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0jph8")
+}
+
+[connection signal="pressed" from="Control/enab" to="." method="_on_enab_pressed"]
+[connection signal="pressed" from="Control/disab" to="." method="_on_disab_pressed"]

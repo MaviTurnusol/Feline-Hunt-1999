@@ -1,0 +1,33 @@
+~ Racon
+[Loan Shark]: Howdy, little miss feline?
+[Loan Shark]: You missed your cool uncle?
+[Catelynn]: ...
+[Loan Shark]: Awww, you are always so cold to me...
+[Loan Shark]: If you continue like this,[set StoryBook.nom2 = true]  maybe i might NOM you.
+[Loan Shark]: Now let's get to the topic, young feline. Have you got the money?
+[Catelynn]: ...
+[Loan Shark]: Only {{UnlimitedRulebook.money}} bucks? Are you fucking kidding me?
+set StoryBook.sharkTurnRapist = true
+[Loan Shark]: Then maybe I might make use of you some other way...
+[Loan Shark]: [speed=0.2] Maybe I might [set StoryBook.nom3 = true]NOM you
+if UnlimitedRulebook.hasSharkKiller == true:
+	- use the gun
+		set StoryBook.gunpointShark = true
+		[Loan Shark]: Hey hey hey hey where did you get that drop that down it is dangerous
+		- you are the one who is dangerous
+			[Loan Shark]: Okay I wont do anything i promise please please drop it
+			- will you also forget my mom's debts?
+				[Loan Shark]: Twenty percent of them, deal? You are straight up robbing me right now.
+				- *Snuggle the gun to him more*
+					[Loan Shark]: Okay! Okay! Seventy Percent! No, I mean all of them! Please let me live!
+					- you say that like i am a girl purchasable with money
+						[Loan Shark]: I am so sorry about your mother! I am a greedy pervert! I am the worst scum ever!
+						- Right. Now open your mouth and NOM this bullet.
+							set StoryBook.shoot = true
+							
+
+else:
+	- f-ff-fuck off..!
+		[Loan Shark]: You have been no use to me this whole time, come on now and let uncle [set StoryBook.nom3 = true]NOM you
+		- Hello I am the developer of the game i have 30 minutes to upload the game please so please restart it this dialogue is not finished. You can finsih it with the gun tho.
+=> END

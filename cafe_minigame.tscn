@@ -1,0 +1,495 @@
+[gd_scene load_steps=26 format=3 uid="uid://bk0m3vgpmmp24"]
+
+[ext_resource type="Script" path="res://cafe_minigame.gd" id="1_qhk3i"]
+[ext_resource type="Texture2D" uid="uid://qc8oa74iu41w" path="res://Sprites/cardboardCup.png" id="2_v1vmu"]
+[ext_resource type="Texture2D" uid="uid://bqlhjmvf7if1e" path="res://Sprites/makina.png" id="3_5g1su"]
+[ext_resource type="Shader" path="res://outlineTest.gdshader" id="3_muukr"]
+[ext_resource type="Shader" path="res://bordertest.gdshader" id="5_eyx37"]
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="6_8e6iq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twa5x"]
+size = Vector2(808.5, 134)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j1fei"]
+shader = ExtResource("3_muukr")
+shader_parameter/outline_color = Color(0.33, 0, 0, 1)
+shader_parameter/progress = 0.0
+shader_parameter/width = 0.064
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nq77f"]
+size = Vector2(59, 36)
+
+[sub_resource type="Animation" id="Animation_pl67g"]
+resource_name = "glow"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/width")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.064, 0.025, 0.064]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.33, 0, 0, 1), Color(0.14409, 5.48239e-07, 2.76752e-07, 1), Color(0.33, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mf0ml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.064]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/outline_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.33, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdx3a"]
+_data = {
+"RESET": SubResource("Animation_mf0ml"),
+"glow": SubResource("Animation_pl67g")
+}
+
+[sub_resource type="Animation" id="Animation_losws"]
+resource_name = "new_animation"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/progress")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_btghs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tmr08"]
+_data = {
+"RESET": SubResource("Animation_btghs"),
+"new_animation": SubResource("Animation_losws")
+}
+
+[sub_resource type="Curve" id="Curve_305b1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.489474, 0.736264), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_bfewo"]
+resource_name = "down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("kettle:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.654498]
+}
+
+[sub_resource type="Animation" id="Animation_xqqw6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("kettle:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wcmcc"]
+_data = {
+"RESET": SubResource("Animation_xqqw6"),
+"down": SubResource("Animation_bfewo")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0fqm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_do6v8"]
+shader = ExtResource("5_eyx37")
+
+[sub_resource type="Animation" id="Animation_2sr8h"]
+resource_name = "startAnim"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("startCountdown:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-20, 108), Vector2(140, 108), Vector2(300, 108), Vector2(1000, 108)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("startCountdown:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": ["3", "3", "2
+", "1
+", "0"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("go:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5, 5.8, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("go:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(5, 5.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(4, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("go:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(5, 5.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(219, 112), Vector2(164, 39)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/black:color")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uvd3d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("startCountdown:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-20, 108)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("startCountdown:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["3"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("go:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("go:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("go:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(219, 112)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer/black:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1e7ol"]
+resource_name = "end"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/black:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gcdl1"]
+_data = {
+"RESET": SubResource("Animation_uvd3d"),
+"end": SubResource("Animation_1e7ol"),
+"startAnim": SubResource("Animation_2sr8h")
+}
+
+[node name="cafeMinigame" type="Node2D"]
+script = ExtResource("1_qhk3i")
+
+[node name="white" type="ColorRect" parent="."]
+offset_left = -376.0
+offset_top = -64.0
+offset_right = 1085.0
+offset_bottom = 559.0
+
+[node name="floorBg" type="ColorRect" parent="."]
+z_index = 1
+offset_left = -159.0
+offset_top = 173.0
+offset_right = 654.0
+offset_bottom = 250.0
+color = Color(0.197937, 0.197937, 0.197937, 1)
+
+[node name="floor" type="ColorRect" parent="."]
+z_index = 1
+offset_left = -158.0
+offset_top = 219.0
+offset_right = 654.0
+offset_bottom = 566.0
+color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(247.75, 273)
+shape = SubResource("RectangleShape2D_twa5x")
+
+[node name="cup" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(302, 188)
+
+[node name="Sprite2D" type="Sprite2D" parent="cup"]
+material = SubResource("ShaderMaterial_j1fei")
+texture = ExtResource("2_v1vmu")
+
+[node name="area" type="Area2D" parent="cup"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cup/area"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_nq77f")
+
+[node name="glower" type="AnimationPlayer" parent="cup"]
+libraries = {
+"": SubResource("AnimationLibrary_hdx3a")
+}
+autoplay = "glow"
+
+[node name="openGlow" type="AnimationPlayer" parent="cup"]
+libraries = {
+"": SubResource("AnimationLibrary_tmr08")
+}
+
+[node name="kettle" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(437, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="kettle"]
+texture = ExtResource("3_5g1su")
+
+[node name="mouth" type="Marker2D" parent="kettle"]
+position = Vector2(-15, -39)
+
+[node name="starter" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="coffeeLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0)
+width = 6.0
+width_curve = SubResource("Curve_305b1")
+default_color = Color(0.211765, 0.168627, 0.14902, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="randoTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="kettleAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wcmcc")
+}
+
+[node name="coffeeDripArea" type="Area2D" parent="." groups=["coffee"]]
+position = Vector2(-291, 188)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coffeeDripArea"]
+shape = SubResource("RectangleShape2D_p0fqm")
+
+[node name="cam" type="Camera2D" parent="."]
+position = Vector2(240, 135)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="shader" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_do6v8")
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="black" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="countdown" type="Timer" parent="."]
+
+[node name="startAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gcdl1")
+}
+autoplay = "startAnim"
+
+[node name="startCountdown" type="Label" parent="."]
+offset_left = -20.0
+offset_top = 108.0
+offset_right = 20.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.301961)
+theme_override_fonts/font = ExtResource("6_8e6iq")
+theme_override_font_sizes/font_size = 32
+text = "3"
+
+[node name="go" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = 219.0
+offset_top = 112.0
+offset_right = 267.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.396078)
+theme_override_fonts/font = ExtResource("6_8e6iq")
+theme_override_font_sizes/font_size = 32
+text = "GO!"
+
+[node name="failTimer" type="Timer" parent="."]
+wait_time = 9.0
+one_shot = true
+autostart = true
+
+[connection signal="area_entered" from="cup/area" to="." method="_on_area_area_entered"]
+[connection signal="area_exited" from="cup/area" to="." method="_on_area_area_exited"]
+[connection signal="animation_finished" from="cup/openGlow" to="." method="_on_open_glow_animation_finished"]
+[connection signal="timeout" from="starter" to="." method="_on_starter_timeout"]
+[connection signal="timeout" from="randoTimer" to="." method="_on_rando_timer_timeout"]
+[connection signal="animation_finished" from="startAnimator" to="." method="_on_start_animator_animation_finished"]
+[connection signal="timeout" from="failTimer" to="." method="_on_fail_timer_timeout"]

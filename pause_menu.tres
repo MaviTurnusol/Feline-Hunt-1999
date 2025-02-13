@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bo8py0bg08yld"]
+
+[ext_resource type="FontFile" uid="uid://kw6m522ffbq8" path="res://MintsodaLimeGreen16X16Regular-EanDl.ttf" id="1_mr4s8"]
+[ext_resource type="Texture2D" uid="uid://demprs4lqnrga" path="res://Sprites/checked.png" id="2_1btue"]
+[ext_resource type="Texture2D" uid="uid://er6eqg6gywv1" path="res://Sprites/unchecked.png" id="3_rfrqs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nbbhe"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+CheckButton/colors/font_color = Color(0.278431, 0.262745, 0.243137, 1)
+CheckButton/colors/font_focus_color = Color(0.278431, 0.262745, 0.243137, 1)
+CheckButton/colors/font_hover_color = Color(0.278431, 0.262745, 0.243137, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.329423, 0.311646, 0.289429, 1)
+CheckButton/colors/font_pressed_color = Color(0.278431, 0.262745, 0.243137, 1)
+CheckButton/fonts/font = ExtResource("1_mr4s8")
+CheckButton/icons/checked = ExtResource("2_1btue")
+CheckButton/icons/checked_disabled = ExtResource("2_1btue")
+CheckButton/icons/checked_disabled_mirrored = ExtResource("3_rfrqs")
+CheckButton/icons/checked_mirrored = ExtResource("2_1btue")
+CheckButton/icons/unchecked = ExtResource("3_rfrqs")
+CheckButton/icons/unchecked_disabled = ExtResource("3_rfrqs")
+CheckButton/icons/unchecked_disabled_mirrored = ExtResource("3_rfrqs")
+CheckButton/icons/unchecked_mirrored = ExtResource("3_rfrqs")
+CheckButton/styles/focus = SubResource("StyleBoxFlat_nbbhe")

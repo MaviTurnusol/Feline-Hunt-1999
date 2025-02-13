@@ -81,3 +81,36 @@ func _on_button_2_mouse_exited():
 func _on_button_3_mouse_exited():
 	var posTween = get_tree().create_tween()
 	posTween.tween_property($Button3, "position", Vector2(11, 228), 0.25)
+
+
+func _on_delete_save_1_pressed():
+	if FileAccess.file_exists("user://save1.json"):
+		DirAccess.remove_absolute(UnlimitedRulebook.SAVE_PATH_1)
+	pass # Replace with function body.
+
+
+func _on_delete_save_2_pressed():
+	if FileAccess.file_exists("user://save3.json"):
+		DirAccess.remove_absolute(UnlimitedRulebook.SAVE_PATH_3)
+
+
+func _on_delete_save_3_pressed():
+	if FileAccess.file_exists("user://save3.json"):
+		DirAccess.remove_absolute(UnlimitedRulebook.SAVE_PATH_3)
+
+
+func _on_button_4_pressed():
+	get_tree().change_scene_to_file("res://cafe_minigame.tscn")
+	pass # Replace with function body.
+
+
+func _on_button_4_mouse_entered():
+	$AudioStreamPlayer.play()
+	var posTween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
+	posTween.tween_property($Button4, "position", Vector2(359, 218), 0.25)
+	pass # Replace with function body.
+
+
+func _on_button_4_mouse_exited():
+	var posTween = get_tree().create_tween()
+	posTween.tween_property($Button4, "position", Vector2(359, 223), 0.25)

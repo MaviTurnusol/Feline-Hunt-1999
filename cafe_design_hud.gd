@@ -12,6 +12,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if !UnlimitedRulebook.buildMenuGuide:
+		$button/arrow.visible = true
+	else:
+		$button/arrow.visible = false
 	if $ScrollMenu/InventoryList.get_child_count() > 3:
 		$ScrollMenu.size.x = $ScrollMenu/InventoryList.get_child_count()*140
 	$ScrollMenu/dragArea/CollisionShape2D.shape.extents.x = $ScrollMenu/ColorRect.size.x
@@ -36,6 +40,7 @@ func _on_button_pressed():
 	else:
 		$puller.play("pull")
 		isPulled = true
+	UnlimitedRulebook.buildMenuGuide = true
 	pass # Replace with function body.
 
 func refresh_items():

@@ -21,7 +21,7 @@ func _on_hit_getter_area_entered(area):
 	pass # Replace with function body.
 
 func spawn_spikes():
-	spikeSpeed += 10
+	spikeSpeed += 15
 	for i in randi_range(1, 4):
 		var spike = load("res://spike.tscn").instantiate()
 		spike.position = Vector2(487 + i*13, 201)

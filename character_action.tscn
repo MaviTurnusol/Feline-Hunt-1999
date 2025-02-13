@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cnb4cdopmbu3b"]
+[gd_scene load_steps=77 format=3 uid="uid://cnb4cdopmbu3b"]
 
 [ext_resource type="Texture2D" uid="uid://sgubpaxor23u" path="res://Sprites/catelynnIdle-Sheet.png" id="1_4o4gt"]
 [ext_resource type="Script" path="res://character_action.gd" id="1_lvh6p"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2rqtuq8lht" path="res://Sprites/catelynnRun-Sheet.png" id="5_1ue8k"]
 [ext_resource type="Texture2D" uid="uid://clbfxwtb7d3i0" path="res://Sprites/catelynnFall-Sheet.png" id="5_cdjra"]
 [ext_resource type="PackedScene" uid="uid://dh4lm0qcpjow0" path="res://stealth_bar.tscn" id="5_ce4ow"]
+[ext_resource type="Texture2D" uid="uid://dbeven2t6oj4d" path="res://Sprites/catelynnCopter-Sheet.png" id="5_iifd6"]
 [ext_resource type="Texture2D" uid="uid://dqkty4bynombk" path="res://Sprites/catelynnJump-Sheet.png" id="7_uabrl"]
 [ext_resource type="Texture2D" uid="uid://catbctqtyfrj5" path="res://Sprites/catelynnStalk-Sheet.png" id="9_55gvs"]
 
@@ -90,6 +91,26 @@ region = Rect2(448, 0, 64, 164)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ao5p"]
 atlas = ExtResource("4_4enqx")
 region = Rect2(512, 0, 64, 164)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huj7p"]
+atlas = ExtResource("5_iifd6")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_grlif"]
+atlas = ExtResource("5_iifd6")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iens7"]
+atlas = ExtResource("5_iifd6")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nnnk"]
+atlas = ExtResource("5_iifd6")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b4wt"]
+atlas = ExtResource("5_iifd6")
+region = Rect2(256, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xontc"]
 atlas = ExtResource("5_cdjra")
@@ -309,6 +330,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_huj7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_grlif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iens7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nnnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8b4wt")
+}],
+"loop": false,
+"name": &"copter",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xontc")
 }, {
 "duration": 1.0,
@@ -446,11 +487,12 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7346"]
-size = Vector2(15, 43)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nwd3r"]
+radius = 7.0
+height = 44.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dyioy"]
-size = Vector2(46, 10)
+size = Vector2(56, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kn1uy"]
 size = Vector2(15, 13)
@@ -466,17 +508,18 @@ script = ExtResource("1_lvh6p")
 texture_filter = 1
 use_parent_material = true
 sprite_frames = SubResource("SpriteFrames_t07xd")
-animation = &"stalk"
-frame_progress = 0.546113
+animation = &"copter"
+frame = 4
+frame_progress = 1.0
 
 [node name="standingCol" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, 2.5)
-shape = SubResource("RectangleShape2D_n7346")
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_nwd3r")
 
 [node name="catchArea" type="Area2D" parent="." groups=["cathingen"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="catchArea"]
-position = Vector2(5, 10)
+position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_dyioy")
 
 [node name="climbCast" type="RayCast2D" parent="."]

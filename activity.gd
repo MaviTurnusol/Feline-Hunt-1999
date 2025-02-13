@@ -70,6 +70,9 @@ func _on_activity_list_index_pressed(index):
 					UnlimitedRulebook.acti4 = "Rest"
 	$activityList.visible = false
 	$selectActivity.visible = true
+	
+	if activityNum == 1:
+		UnlimitedRulebook.planningBookGuide = true
 	pass # Replace with function body.
 
 

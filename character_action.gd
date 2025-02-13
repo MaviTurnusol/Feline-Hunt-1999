@@ -7,6 +7,7 @@ var isRunning = false
 var isClimbing = false
 var isCatching = false
 var isStalking = false
+var isHelicopter = false
 var canRun = true
 var canStalk = true
 var direction = 0
@@ -26,12 +27,20 @@ func _ready():
 	UnlimitedRulebook.actionPlayer = self
 
 func _physics_process(delta):
+	if UnlimitedRulebook.infiniteStamina:
+		stamina = 100
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if !isHelicopter:
+			velocity += get_gravity() * delta
+		else:
+			if !Input.is_action_pressed("space"):
+				velocity += get_gravity() * delta
 	
 	if(velocity.x != 0):
-		if isCatching:
+		if isHelicopter:
+			$anima.play("copter")
+		elif isCatching:
 			pass
 		elif isClimbing:
 			pass
@@ -46,7 +55,7 @@ func _physics_process(delta):
 		if(velocity.x < 0):
 			$anima.flip_h = true
 	else:
-		if !isClimbing && !isCatching:
+		if !isClimbing && !isCatching && !isHelicopter:
 			$anima.play("idle")
 	
 	if !isCatching:
@@ -65,7 +74,16 @@ func _physics_process(delta):
 	if(Input.is_action_just_pressed("down")):
 		position.y += 1
 	
-	if isClimbing:
+	if isHelicopter:
+		if !$anima.is_playing(): $anima.pause()
+		if Input.is_action_just_pressed("space"):
+			velocity.y -= delta*3200
+			$anima.play("copter")
+		if is_on_floor():
+			isHelicopter = false
+	if isHelicopter:
+		pass
+	elif isClimbing:
 		speed = 0.0
 		if $climbCast.get_collision_point().y >= $posClimb.global_position.y:
 			velocity.y = 0
@@ -96,12 +114,12 @@ func _physics_process(delta):
 		stamina = 100
 	if $climbCast.is_colliding():
 		if $climbCast.get_collider().is_in_group("climbable"):
-			if Input.is_action_just_pressed("space") && direction == 0 && !isClimbing && !isCatching:
+			if Input.is_action_just_pressed("space") && direction == 0 && !isClimbing && !isCatching && !isHelicopter:
 				isClimbing = true
 				stamina -= 10
 				velocity.y = -400
 				$anima.play("climb")
-	if !isClimbing && isRunning && direction != 0 && Input.is_action_just_pressed("space") && !isCatching:
+	if !isClimbing && !isHelicopter && isRunning && direction != 0 && Input.is_action_just_pressed("space") && !isCatching:
 		isCatching = true
 		velocity.x = direction * 175
 		velocity.y = -50
@@ -123,9 +141,15 @@ func _physics_process(delta):
 	
 	if !isClimbing && Input.is_action_just_pressed("space") && is_on_floor():
 		velocity.y -= 175
+	if !isClimbing && !isCatching && Input.is_action_just_pressed("space") && !is_on_floor():
+		if UnlimitedRulebook.helicopter:
+			isHelicopter = true
+			if $anima.animation != "copter": $anima.play("copter")
 	if direction:
-		if !isClimbing && !isCatching:
+		if !isClimbing && !isCatching && !isHelicopter:
 			velocity.x = direction * speed
+		if isHelicopter:
+			velocity.x += delta * direction * speed/2
 	else:
 		if !isCatching:
 			velocity.x = move_toward(velocity.x, 0, speed)
